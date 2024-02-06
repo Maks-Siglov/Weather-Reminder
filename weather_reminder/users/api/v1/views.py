@@ -1,3 +1,5 @@
+from django.http import HttpRequest
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
@@ -9,7 +11,7 @@ from users.models import User
 
 
 class Register(APIView):
-    def post(self, request):
+    def post(self, request: HttpRequest) -> Response:
         serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -17,7 +19,7 @@ class Register(APIView):
 
 
 class Login(APIView):
-    def post(self, request):
+    def post(self, request: HttpRequest) -> Response:
         email = request.data["email"]
         password = request.data["password"]
 

@@ -1,0 +1,570 @@
+{
+    "London": [
+        {
+            "date": 1,
+            "temperature": 27,
+            "humidity": 56,
+            "wind_speed": 12,
+            "description": "Rainy"
+        },
+        {
+            "date": 2,
+            "temperature": 20,
+            "humidity": 53,
+            "wind_speed": 8,
+            "description": "Snowy"
+        },
+        {
+            "date": 3,
+            "temperature": 15,
+            "humidity": 50,
+            "wind_speed": 10,
+            "description": "Cloudy"
+        },
+        {
+            "date": 4,
+            "temperature": 30,
+            "humidity": 83,
+            "wind_speed": 14,
+            "description": "Sunny"
+        },
+        {
+            "date": 5,
+            "temperature": 11,
+            "humidity": 55,
+            "wind_speed": 8,
+            "description": "Partly Cloudy"
+        },
+        {
+            "date": 6,
+            "temperature": 30,
+            "humidity": 60,
+            "wind_speed": 19,
+            "description": "Cloudy"
+        },
+        {
+            "date": 7,
+            "temperature": 21,
+            "humidity": 50,
+            "wind_speed": 13,
+            "description": "Cloudy"
+        },
+        {
+            "date": 8,
+            "temperature": 23,
+            "humidity": 51,
+            "wind_speed": 15,
+            "description": "Partly Cloudy"
+        },
+        {
+            "date": 9,
+            "temperature": 21,
+            "humidity": 62,
+            "wind_speed": 14,
+            "description": "Cloudy"
+        },
+        {
+            "date": 10,
+            "temperature": 15,
+            "humidity": 85,
+            "wind_speed": 16,
+            "description": "Rainy"
+        },
+        {
+            "date": 11,
+            "temperature": 23,
+            "humidity": 77,
+            "wind_speed": 5,
+            "description": "Cloudy"
+        },
+        {
+            "date": 12,
+            "temperature": 30,
+            "humidity": 65,
+            "wind_speed": 8,
+            "description": "Rainy"
+        },
+        {
+            "date": 13,
+            "temperature": 18,
+            "humidity": 56,
+            "wind_speed": 10,
+            "description": "Snowy"
+        },
+        {
+            "date": 14,
+            "temperature": 27,
+            "humidity": 84,
+            "wind_speed": 12,
+            "description": "Sunny"
+        },
+        {
+            "date": 15,
+            "temperature": 10,
+            "humidity": 51,
+            "wind_speed": 7,
+            "description": "Snowy"
+        },
+        {
+            "date": 16,
+            "temperature": 14,
+            "humidity": 64,
+            "wind_speed": 9,
+            "description": "Snowy"
+        },
+        {
+            "date": 17,
+            "temperature": 18,
+            "humidity": 89,
+            "wind_speed": 9,
+            "description": "Sunny"
+        },
+        {
+            "date": 18,
+            "temperature": 28,
+            "humidity": 63,
+            "wind_speed": 5,
+            "description": "Partly Cloudy"
+        },
+        {
+            "date": 19,
+            "temperature": 10,
+            "humidity": 68,
+            "wind_speed": 20,
+            "description": "Sunny"
+        },
+        {
+            "date": 20,
+            "temperature": 13,
+            "humidity": 85,
+            "wind_speed": 11,
+            "description": "Partly Cloudy"
+        }
+    ],
+    "New York": [
+        {
+            "date": 1,
+            "temperature": 24,
+            "humidity": 55,
+            "wind_speed": 6,
+            "description": "Sunny"
+        },
+        {
+            "date": 2,
+            "temperature": 14,
+            "humidity": 74,
+            "wind_speed": 12,
+            "description": "Sunny"
+        },
+        {
+            "date": 3,
+            "temperature": 13,
+            "humidity": 65,
+            "wind_speed": 7,
+            "description": "Sunny"
+        },
+        {
+            "date": 4,
+            "temperature": 12,
+            "humidity": 85,
+            "wind_speed": 6,
+            "description": "Cloudy"
+        },
+        {
+            "date": 5,
+            "temperature": 11,
+            "humidity": 50,
+            "wind_speed": 12,
+            "description": "Snowy"
+        },
+        {
+            "date": 6,
+            "temperature": 13,
+            "humidity": 73,
+            "wind_speed": 11,
+            "description": "Sunny"
+        },
+        {
+            "date": 7,
+            "temperature": 28,
+            "humidity": 78,
+            "wind_speed": 18,
+            "description": "Partly Cloudy"
+        },
+        {
+            "date": 8,
+            "temperature": 17,
+            "humidity": 66,
+            "wind_speed": 8,
+            "description": "Partly Cloudy"
+        },
+        {
+            "date": 9,
+            "temperature": 23,
+            "humidity": 77,
+            "wind_speed": 9,
+            "description": "Rainy"
+        },
+        {
+            "date": 10,
+            "temperature": 11,
+            "humidity": 66,
+            "wind_speed": 5,
+            "description": "Partly Cloudy"
+        },
+        {
+            "date": 11,
+            "temperature": 25,
+            "humidity": 53,
+            "wind_speed": 7,
+            "description": "Snowy"
+        },
+        {
+            "date": 12,
+            "temperature": 23,
+            "humidity": 86,
+            "wind_speed": 10,
+            "description": "Rainy"
+        },
+        {
+            "date": 13,
+            "temperature": 25,
+            "humidity": 65,
+            "wind_speed": 11,
+            "description": "Cloudy"
+        },
+        {
+            "date": 14,
+            "temperature": 20,
+            "humidity": 83,
+            "wind_speed": 10,
+            "description": "Partly Cloudy"
+        },
+        {
+            "date": 15,
+            "temperature": 13,
+            "humidity": 52,
+            "wind_speed": 6,
+            "description": "Partly Cloudy"
+        },
+        {
+            "date": 16,
+            "temperature": 29,
+            "humidity": 63,
+            "wind_speed": 10,
+            "description": "Cloudy"
+        },
+        {
+            "date": 17,
+            "temperature": 17,
+            "humidity": 89,
+            "wind_speed": 13,
+            "description": "Snowy"
+        },
+        {
+            "date": 18,
+            "temperature": 29,
+            "humidity": 83,
+            "wind_speed": 7,
+            "description": "Partly Cloudy"
+        },
+        {
+            "date": 19,
+            "temperature": 30,
+            "humidity": 80,
+            "wind_speed": 14,
+            "description": "Sunny"
+        },
+        {
+            "date": 20,
+            "temperature": 12,
+            "humidity": 54,
+            "wind_speed": 8,
+            "description": "Rainy"
+        }
+    ],
+    "Tokyo": [
+        {
+            "date": 1,
+            "temperature": 18,
+            "humidity": 69,
+            "wind_speed": 13,
+            "description": "Partly Cloudy"
+        },
+        {
+            "date": 2,
+            "temperature": 22,
+            "humidity": 80,
+            "wind_speed": 12,
+            "description": "Partly Cloudy"
+        },
+        {
+            "date": 3,
+            "temperature": 28,
+            "humidity": 79,
+            "wind_speed": 8,
+            "description": "Cloudy"
+        },
+        {
+            "date": 4,
+            "temperature": 29,
+            "humidity": 58,
+            "wind_speed": 17,
+            "description": "Snowy"
+        },
+        {
+            "date": 5,
+            "temperature": 11,
+            "humidity": 51,
+            "wind_speed": 12,
+            "description": "Cloudy"
+        },
+        {
+            "date": 6,
+            "temperature": 25,
+            "humidity": 62,
+            "wind_speed": 7,
+            "description": "Partly Cloudy"
+        },
+        {
+            "date": 7,
+            "temperature": 18,
+            "humidity": 63,
+            "wind_speed": 17,
+            "description": "Partly Cloudy"
+        },
+        {
+            "date": 8,
+            "temperature": 24,
+            "humidity": 70,
+            "wind_speed": 17,
+            "description": "Snowy"
+        },
+        {
+            "date": 9,
+            "temperature": 21,
+            "humidity": 80,
+            "wind_speed": 7,
+            "description": "Rainy"
+        },
+        {
+            "date": 10,
+            "temperature": 18,
+            "humidity": 53,
+            "wind_speed": 12,
+            "description": "Cloudy"
+        },
+        {
+            "date": 11,
+            "temperature": 12,
+            "humidity": 83,
+            "wind_speed": 18,
+            "description": "Cloudy"
+        },
+        {
+            "date": 12,
+            "temperature": 22,
+            "humidity": 81,
+            "wind_speed": 18,
+            "description": "Partly Cloudy"
+        },
+        {
+            "date": 13,
+            "temperature": 30,
+            "humidity": 53,
+            "wind_speed": 10,
+            "description": "Partly Cloudy"
+        },
+        {
+            "date": 14,
+            "temperature": 27,
+            "humidity": 50,
+            "wind_speed": 8,
+            "description": "Cloudy"
+        },
+        {
+            "date": 15,
+            "temperature": 22,
+            "humidity": 54,
+            "wind_speed": 5,
+            "description": "Cloudy"
+        },
+        {
+            "date": 16,
+            "temperature": 19,
+            "humidity": 52,
+            "wind_speed": 5,
+            "description": "Cloudy"
+        },
+        {
+            "date": 17,
+            "temperature": 11,
+            "humidity": 72,
+            "wind_speed": 5,
+            "description": "Snowy"
+        },
+        {
+            "date": 18,
+            "temperature": 30,
+            "humidity": 78,
+            "wind_speed": 13,
+            "description": "Rainy"
+        },
+        {
+            "date": 19,
+            "temperature": 16,
+            "humidity": 69,
+            "wind_speed": 18,
+            "description": "Snowy"
+        },
+        {
+            "date": 20,
+            "temperature": 17,
+            "humidity": 79,
+            "wind_speed": 16,
+            "description": "Snowy"
+        }
+    ],
+    "Paris": [
+        {
+            "date": 1,
+            "temperature": 23,
+            "humidity": 55,
+            "wind_speed": 12,
+            "description": "Sunny"
+        },
+        {
+            "date": 2,
+            "temperature": 10,
+            "humidity": 68,
+            "wind_speed": 11,
+            "description": "Rainy"
+        },
+        {
+            "date": 3,
+            "temperature": 13,
+            "humidity": 54,
+            "wind_speed": 20,
+            "description": "Cloudy"
+        },
+        {
+            "date": 4,
+            "temperature": 25,
+            "humidity": 59,
+            "wind_speed": 11,
+            "description": "Partly Cloudy"
+        },
+        {
+            "date": 5,
+            "temperature": 26,
+            "humidity": 83,
+            "wind_speed": 6,
+            "description": "Partly Cloudy"
+        },
+        {
+            "date": 6,
+            "temperature": 12,
+            "humidity": 85,
+            "wind_speed": 11,
+            "description": "Snowy"
+        },
+        {
+            "date": 7,
+            "temperature": 19,
+            "humidity": 51,
+            "wind_speed": 11,
+            "description": "Sunny"
+        },
+        {
+            "date": 8,
+            "temperature": 11,
+            "humidity": 63,
+            "wind_speed": 7,
+            "description": "Sunny"
+        },
+        {
+            "date": 9,
+            "temperature": 30,
+            "humidity": 76,
+            "wind_speed": 16,
+            "description": "Partly Cloudy"
+        },
+        {
+            "date": 10,
+            "temperature": 25,
+            "humidity": 53,
+            "wind_speed": 11,
+            "description": "Partly Cloudy"
+        },
+        {
+            "date": 11,
+            "temperature": 29,
+            "humidity": 82,
+            "wind_speed": 9,
+            "description": "Cloudy"
+        },
+        {
+            "date": 12,
+            "temperature": 11,
+            "humidity": 90,
+            "wind_speed": 6,
+            "description": "Sunny"
+        },
+        {
+            "date": 13,
+            "temperature": 26,
+            "humidity": 55,
+            "wind_speed": 13,
+            "description": "Sunny"
+        },
+        {
+            "date": 14,
+            "temperature": 30,
+            "humidity": 72,
+            "wind_speed": 19,
+            "description": "Cloudy"
+        },
+        {
+            "date": 15,
+            "temperature": 13,
+            "humidity": 86,
+            "wind_speed": 6,
+            "description": "Partly Cloudy"
+        },
+        {
+            "date": 16,
+            "temperature": 26,
+            "humidity": 69,
+            "wind_speed": 11,
+            "description": "Rainy"
+        },
+        {
+            "date": 17,
+            "temperature": 15,
+            "humidity": 58,
+            "wind_speed": 12,
+            "description": "Snowy"
+        },
+        {
+            "date": 18,
+            "temperature": 17,
+            "humidity": 50,
+            "wind_speed": 12,
+            "description": "Rainy"
+        },
+        {
+            "date": 19,
+            "temperature": 13,
+            "humidity": 76,
+            "wind_speed": 11,
+            "description": "Sunny"
+        },
+        {
+            "date": 20,
+            "temperature": 22,
+            "humidity": 90,
+            "wind_speed": 17,
+            "description": "Cloudy"
+        }
+    ]
+}

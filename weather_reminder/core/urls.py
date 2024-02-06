@@ -22,4 +22,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/auth/v1/", include("users.api.v1.urls")),
     path("api/subscribe/v1/", include("subscription.api.v1.urls")),
+    path("api/wether-data/v1/", include("api.v1.urls"))
 ]
