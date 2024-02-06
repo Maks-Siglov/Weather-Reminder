@@ -5,7 +5,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-from weather_reminder.users.api.v1 import views
+from users.api.v1 import views
 
 urlpatterns = [
     path("register/", views.Register.as_view(), name="register"),
