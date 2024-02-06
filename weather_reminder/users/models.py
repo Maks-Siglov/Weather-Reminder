@@ -10,10 +10,10 @@ from django.db import models
 class UserManager(BaseUserManager):
     def create_user(self, username, email, password=None, **kwargs):
         if username is None:
-            raise ValueError('Users must have a username.')
+            raise ValueError("Users must have a username.")
 
         if email is None:
-            raise ValueError('Users must have an email address.')
+            raise ValueError("Users must have an email address.")
 
         email = self.normalize_email(email)
         user = self.model(username=username, email=email, **kwargs)
@@ -24,7 +24,7 @@ class UserManager(BaseUserManager):
 
     def create_superuser(self, username, email, password=None, **kwargs):
         if password is None:
-            raise ValueError('Superusers must have a password.')
+            raise ValueError("Superusers must have a password.")
 
         user = self.create_user(
             username=username, email=email, password=password, **kwargs

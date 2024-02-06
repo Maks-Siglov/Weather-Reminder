@@ -18,8 +18,8 @@ class Register(APIView):
 
 class Login(APIView):
     def post(self, request):
-        email = request.data['email']
-        password = request.data['password']
+        email = request.data["email"]
+        password = request.data["password"]
 
         user = User.objects.filter(email=email).first()
 
@@ -32,8 +32,10 @@ class Login(APIView):
 
         refresh_token = RefreshToken.for_user(user)
 
-        return Response({
-            "message": "Login successful",
-            "refresh": str(refresh_token),
-            "access": str(refresh_token.access_token)
-        })
+        return Response(
+            {
+                "message": "Login successful",
+                "refresh": str(refresh_token),
+                "access": str(refresh_token.access_token),
+            }
+        )
