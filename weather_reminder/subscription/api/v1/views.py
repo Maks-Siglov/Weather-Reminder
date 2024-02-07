@@ -1,6 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpRequest
 
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -39,3 +40,11 @@ class Subscribe(APIView):
 
         subscription.delete()
         return Response(status=204)
+
+
+class SubscriptionList(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request: HttpRequest) -> Response:
+        subscriptions = Subscription.objects.all()
+        serializer = SubscriptionSerializer(subscriptions, many=True)
+        return Response(serializer.data, status=200)
