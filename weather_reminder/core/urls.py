@@ -27,5 +27,8 @@ urlpatterns = [
     ),
     path("api/wether-data/v1/", include("api.v1.urls", "weather_api")),
     path("", include("main.urls", namespace="main")),
+    path(
+        "subscription/", include("subscription.urls", namespace="subscription")
+    ),
     path("users/", include("users.urls", namespace="users")),
 ]

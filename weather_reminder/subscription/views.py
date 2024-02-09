@@ -1,3 +1,9 @@
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 
-# Create your views here.
+from users.utils import check_access_token
+
+
+@check_access_token
+def subscriptions(request: HttpRequest) -> HttpResponse:
+    return render(request, "subscription/subscriptions.html")

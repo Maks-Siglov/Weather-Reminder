@@ -7,12 +7,33 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'users:login' %}">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'users:register' %}">Register</a>
-                </li>
+
+                {% if user.is_authenticated %}
+
+                    {% if user.is_admin or user.is_staff %}
+                        <li><a class="dropdown-item  text-white" href="{% url 'admin:index' %}">Admin</a></li>
+                    {% endif %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'subscription:subscriptions' %}">Subscriptions</a>
+                    </li>
+
+                    <form id="logout-form" action="{% url 'auth_api:logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-link nav-link">Logout</button>
+                    </form>
+
+                {% else %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users:login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users:register' %}">Register</a>
+                    </li>
+
+                {% endif %}
+
             </ul>
         </div>
     </div>

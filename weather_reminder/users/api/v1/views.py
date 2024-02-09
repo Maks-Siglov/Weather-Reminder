@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpRequest
 
 from rest_framework.views import APIView
@@ -24,14 +25,11 @@ class Login(APIView):
         email = request.data["email"]
         password = request.data["password"]
 
-        user = User.objects.filter(email=email).first()
-
+        user = authenticate(request, email=email, password=password)
         if user is None:
-            raise AuthenticationFailed(
-                f"User with with email {email} not found"
-            )
-        if not user.check_password(password):
-            raise AuthenticationFailed("Incorrect password")
+            raise AuthenticationFailed("Incorrect credentials provided")
+
+        login(request, user)
 
         refresh_token = RefreshToken.for_user(user)
 
@@ -48,4 +46,15 @@ class Login(APIView):
             httponly=True,
             expires=settings.ACCESS_TOKEN_EXPIRE_TIME,
         )
+        return response
+
+
+class Logout(APIView):
+    def post(self, request: HttpRequest) -> Response:
+        logout(request)
+
+        response = Response({"message": "Logout successful"}, status=200)
+        response.delete_cookie("refresh_token")
+        response.delete_cookie("access_token")
+
         return response
