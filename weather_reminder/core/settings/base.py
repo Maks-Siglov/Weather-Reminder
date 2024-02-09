@@ -45,9 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     "rest_framework",
-
     "main.apps.MainConfig",
     "users.apps.UsersConfig",
     "subscription.apps.SubscriptionConfig",
@@ -75,7 +73,6 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
     "ROTATE_REFRESH_TOKENS": False,
     "BLACKLIST_AFTER_ROTATION": False,
-
     "UPDATE_LAST_LOGIN": False,
     "ALGORITHM": "HS256",
     "VERIFYING_KEY": "",
@@ -96,7 +93,6 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_REFRESH_EXP_CLAIM": "refresh_exp",
     "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5),
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
-
     "TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainPairSerializer",
     "TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSerializer",
     "TOKEN_VERIFY_SERIALIZER": "rest_framework_simplejwt.serializers.TokenVerifySerializer",
@@ -106,11 +102,9 @@ SIMPLE_JWT = {
 }
 
 REFRESH_TOKEN_EXPIRE_TIME = (
-        datetime.now() + SIMPLE_JWT["REFRESH_TOKEN_LIFETIME"]
+    datetime.now() + SIMPLE_JWT["REFRESH_TOKEN_LIFETIME"]
 )
-ACCESS_TOKEN_EXPIRE_TIME = (
-        datetime.now() + SIMPLE_JWT["ACCESS_TOKEN_LIFETIME"]
-)
+ACCESS_TOKEN_EXPIRE_TIME = datetime.now() + SIMPLE_JWT["ACCESS_TOKEN_LIFETIME"]
 
 
 ROOT_URLCONF = "core.urls"

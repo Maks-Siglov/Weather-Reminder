@@ -21,11 +21,11 @@ class WeatherData(APIView):
             return Response(
                 {"error": f"Weather data for {city} not found"}, status=404
             )
-        day_data = [day for day in city_data if day['date'] == date]
+        day_data = [day for day in city_data if day["date"] == date]
         if day_data is None:
             return Response(
                 {"error": f"Weather data for {city} for {date} not found"},
-                status=404
+                status=404,
             )
         return Response(data=day_data, status=200)
 
@@ -42,9 +42,7 @@ class APIWeatherData(APIView):
 
         if response.status_code == 200:
             data = response.json()
-            weather_data = data['list'][0]
+            weather_data = data["list"][0]
             return Response(data=weather_data, status=200)
 
         return Response(status=404)
-
-

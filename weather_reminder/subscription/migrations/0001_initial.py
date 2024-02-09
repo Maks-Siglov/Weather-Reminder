@@ -27,7 +27,10 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("city", models.CharField(max_length=50)),
-                ("notification_period", models.PositiveIntegerField(default=24)),
+                (
+                    "notification_period",
+                    models.PositiveIntegerField(default=24),
+                ),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
                 ("updated_at", models.DateTimeField(auto_now=True)),
                 (

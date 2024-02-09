@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from django.conf import settings
 from django.http import HttpRequest
 
@@ -37,19 +35,17 @@ class Login(APIView):
 
         refresh_token = RefreshToken.for_user(user)
 
-        response = Response(
-            {"message": "Login successful"}, status=200
-        )
+        response = Response({"message": "Login successful"}, status=200)
         response.set_cookie(
             key="refresh_token",
             value=str(refresh_token),
             httponly=True,
-            expires=settings.REFRESH_TOKEN_EXPIRE_TIME
+            expires=settings.REFRESH_TOKEN_EXPIRE_TIME,
         )
         response.set_cookie(
             key="access_token",
             value=str(refresh_token.access_token),
             httponly=True,
-            expires=settings.ACCESS_TOKEN_EXPIRE_TIME
+            expires=settings.ACCESS_TOKEN_EXPIRE_TIME,
         )
         return response

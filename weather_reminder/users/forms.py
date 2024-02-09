@@ -9,7 +9,7 @@ class UserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', 'password', 'confirm_password')
+        fields = ("username", "password", "confirm_password")
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password")

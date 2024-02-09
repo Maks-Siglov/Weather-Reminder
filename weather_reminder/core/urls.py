@@ -24,5 +24,5 @@ urlpatterns = [
     path("api/subscribtion/v1/", include("subscription.api.v1.urls")),
     path("api/wether-data/v1/", include("api.v1.urls")),
     path("", include("main.urls", namespace="main")),
-    path("users/", include("users.urls", namespace="users"))
+    path("users/", include("users.urls", namespace="users")),
 ]

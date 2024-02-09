@@ -15,13 +15,12 @@ class Subscribe(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=201)
+
     def put(self, request: HttpRequest, subscription_id: int) -> Response:
         try:
             subscription = Subscription.objects.get(pk=subscription_id)
         except ObjectDoesNotExist:
-            return Response(
-                {"error": "Subscription not found"}, status=404
-            )
+            return Response({"error": "Subscription not found"}, status=404)
 
         serializer = SubscriptionSerializer(
             subscription, data=request.data, partial=True
@@ -34,9 +33,7 @@ class Subscribe(APIView):
         try:
             subscription = Subscription.objects.get(pk=subscription_id)
         except ObjectDoesNotExist:
-            return Response(
-                {"error": "Subscription not found"}, status=404
-            )
+            return Response({"error": "Subscription not found"}, status=404)
 
         subscription.delete()
         return Response(status=204)
@@ -44,6 +41,7 @@ class Subscribe(APIView):
 
 class SubscriptionList(APIView):
     permission_classes = [IsAuthenticated]
+
     def get(self, request: HttpRequest) -> Response:
         subscriptions = Subscription.objects.all()
         serializer = SubscriptionSerializer(subscriptions, many=True)
