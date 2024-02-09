@@ -2,6 +2,8 @@ from django.urls import path
 
 from subscription.api.v1 import views
 
+app_name = "subscription_api"
+
 urlpatterns = [
     path("create", views.Subscribe.as_view()),
     path("<int:subscription_id>/edit", views.Subscribe.as_view()),
