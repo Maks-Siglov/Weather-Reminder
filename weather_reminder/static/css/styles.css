@@ -1,0 +1,16 @@
+.my-navbar {
+  padding: 20px;
+}
+
+.my-navbar .navbar-brand {
+  font-size: 24px;
+}
+
+.my-navbar .navbar-toggler-icon {
+  font-size: 24px;
+}
+
+.my-navbar .navbar-nav .nav-link {
+  font-size: 20px;
+  margin-right: 20px;
+}

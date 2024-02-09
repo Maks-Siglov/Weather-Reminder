@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os
 
-from datetime import timedelta
+from datetime import timedelta, datetime
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
     "rest_framework",
 
+    "main.apps.MainConfig",
     "users.apps.UsersConfig",
     "subscription.apps.SubscriptionConfig",
 ]
@@ -104,13 +105,20 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
 
+REFRESH_TOKEN_EXPIRE_TIME = (
+        datetime.now() + SIMPLE_JWT["REFRESH_TOKEN_LIFETIME"]
+)
+ACCESS_TOKEN_EXPIRE_TIME = (
+        datetime.now() + SIMPLE_JWT["ACCESS_TOKEN_LIFETIME"]
+)
+
 
 ROOT_URLCONF = "core.urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -178,6 +186,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "static/"
+
+STATICFILES_DIRS = (BASE_DIR / "static",)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
