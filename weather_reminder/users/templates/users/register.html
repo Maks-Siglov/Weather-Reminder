@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Register{% endblock %}
 
 {% block content %}
@@ -7,7 +7,7 @@
     <div class="auth-container">
         <div class="auth-form">
             <h2 class="text-center">Register</h2>
-            <form action="{% url 'auth_api:register' %}" method="POST">
+            <form action="{% url 'auth_api:register' %}" method="POST" id="register-form">
                 {% csrf_token %}
                 <input type="text" name="username" placeholder="Username" required>
                 <input type="email" name="email" placeholder="Email" required>
@@ -17,5 +17,5 @@
             </form>
         </div>
     </div>
-
+     <script src="{% static 'js/register.js' %}"></script>
 {% endblock %}

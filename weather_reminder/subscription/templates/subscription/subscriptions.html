@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}My Subscriptions{% endblock %}
 
 {% block content %}
+<a id="subscriptionListLink" href="{% url 'subscription_api:list' %}">List</a>
 
+    <div id="subscriptionList"></div>
+
+{#    <script href="{% static 'js/subscription_list.js' %}"></script>#}
 {% endblock %}

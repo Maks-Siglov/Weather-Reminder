@@ -1,7 +1,6 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpRequest
 
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -10,6 +9,7 @@ from subscription.models import Subscription
 
 
 class Subscribe(APIView):
+
     def post(self, request: HttpRequest) -> Response:
         serializer = SubscriptionSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -40,7 +40,6 @@ class Subscribe(APIView):
 
 
 class SubscriptionList(APIView):
-    permission_classes = [IsAuthenticated]
 
     def get(self, request: HttpRequest) -> Response:
         subscriptions = Subscription.objects.all()

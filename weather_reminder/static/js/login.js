@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const loginForm = document.getElementById('loginForm');
 
     loginForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent default form submission
+        event.preventDefault();
 
         const formData = new FormData(loginForm);
 
@@ -13,14 +13,11 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(response => {
             if (response.status === 200) {
                 window.location.href = '/';
-            } else if (response.status === 401) {
-                return response.json();
             } else {
-                throw new Error('Unexpected response from server');
+                console.log(response);
             }
         })
         .then(data => {
-
             Swal.fire({
                 icon: 'error',
                 title: 'Authentication Failed',

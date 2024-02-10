@@ -18,7 +18,7 @@
                         <a class="nav-link" href="{% url 'subscription:subscriptions' %}">Subscriptions</a>
                     </li>
 
-                    <form id="logout-form" action="{% url 'auth_api:logout' %}" method="post">
+                    <form id="logout-form" action="{% url 'auth_api:logout' %}" method="post" id="logout-form'">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-link nav-link">Logout</button>
                     </form>
