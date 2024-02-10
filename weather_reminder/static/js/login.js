@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     const loginForm = document.getElementById('loginForm');
+    const errorMessageDiv = document.getElementById('error-message');
 
     loginForm.addEventListener('submit', function(event) {
         event.preventDefault();
@@ -13,18 +14,13 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(response => {
             if (response.status === 200) {
                 window.location.href = '/';
-            } else {
-                console.log(response);
+            } else if (response.status === 400) {
+                return response.json()
             }
         })
-        .then(data => {
-            Swal.fire({
-                icon: 'error',
-                title: 'Authentication Failed',
-                text: data.error,
-            }).then(() => {
-                window.location.href = '/users/login/';
-            });
-        })
+            .then(data => {
+                errorMessageDiv.textContent = data.error
+                errorMessageDiv.classList.remove('d-none');
+            })
     });
 });

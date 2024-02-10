@@ -27,7 +27,7 @@ class Login(APIView):
 
         user = authenticate(request, email=email, password=password)
         if user is None:
-            return Response({"error": "Invalid email or password"}, status=401)
+            return Response({"error": "Invalid email or password"}, status=400)
 
         login(request, user)
 
