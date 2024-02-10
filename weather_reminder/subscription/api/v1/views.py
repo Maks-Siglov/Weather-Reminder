@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 
 from subscription.api.v1.serializers import SubscriptionSerializer
 from subscription.models import Subscription
+from users.models import User
 
 
 class Subscribe(APIView):
@@ -41,7 +42,13 @@ class Subscribe(APIView):
 
 class SubscriptionList(APIView):
 
-    def get(self, request: HttpRequest) -> Response:
-        subscriptions = Subscription.objects.all()
+    def get(self, request: HttpRequest, email: str) -> Response:
+        try:
+            user = User.objects.get(email=email)
+        except ObjectDoesNotExist:
+            return Response(
+                {"error": f"User with email {email} not found"}, status=404
+            )
+        subscriptions = Subscription.objects.filter(user=user)
         serializer = SubscriptionSerializer(subscriptions, many=True)
         return Response(serializer.data, status=200)

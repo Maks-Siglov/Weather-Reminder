@@ -35,7 +35,6 @@ def check_access_token(func):
             response.set_cookie(
                 key="access_token",
                 value=str(new_access_token),
-                httponly=True,
                 expires=settings.ACCESS_TOKEN_EXPIRE_TIME,
             )
             return response

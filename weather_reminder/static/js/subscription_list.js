@@ -1,32 +1,37 @@
-// Find the "List" link by its id
-const subscriptionListLink = document.getElementById("subscriptionListLink");
+document.addEventListener('DOMContentLoaded', function () {
+    const subscriptionListLink = document.getElementById('subscription-list')
+    const subscriptionContainer = document.getElementById('subscription-container')
+    subscriptionListLink.addEventListener('click', function (event) {
+        event.preventDefault();
 
-// Attach an event listener to the link
-subscriptionListLink.addEventListener("click", function(event) {
-    event.preventDefault(); // Prevent the default link behavior
-
-    // Fetch subscription data when the link is clicked
-    fetch(this.href)
-        .then(response => response.json())
-        .then(data => {
-            const subscriptionListContainer = document.getElementById("subscriptionList");
-
-            // Clear existing content in the subscription list container
-            subscriptionListContainer.innerHTML = '';
-
-            // Iterate over the subscription data and create HTML elements
-            data.forEach(subscription => {
-                const subscriptionDiv = document.createElement("div");
-                subscriptionDiv.classList.add("subscription");
-                subscriptionDiv.innerHTML = `
-                    <p>User: ${subscription.user}</p>
-                    <p>City: ${subscription.city}</p>
-                    <p>Notification Period: ${subscription.notification_period}</p>
-                `;
-                subscriptionListContainer.appendChild(subscriptionDiv);
-            });
+        fetch(subscriptionListLink.href, {
+            method: "GET",
         })
-        .catch(error => {
-            console.error("Error fetching subscription data:", error);
-        });
-});
+            .then(response => response.json())
+            .then(data => {
+                // window.location.href = '/subscriptions/';
+                data.forEach(subscription => {
+                    const card = document.createElement('div');
+                    card.classList.add('card', 'm-2');
+
+                    const cardBody = document.createElement('div');
+                    cardBody.classList.add('card-body');
+
+                    const cityName = document.createElement('h5');
+                    cityName.classList.add('card-title');
+                    cityName.textContent = subscription.city;
+
+                    const notificationPeriod = document.createElement('p');
+                    notificationPeriod.classList.add('card-text');
+                    notificationPeriod.textContent = `Notification Period: ${subscription.notification_period} hours`;
+
+                    cardBody.appendChild(cityName);
+                    cardBody.appendChild(notificationPeriod);
+                    card.appendChild(cardBody);
+
+                    subscriptionContainer.appendChild(card);
+                })
+
+            })
+    })
+})

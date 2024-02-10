@@ -3,9 +3,9 @@
 {% block title %}My Subscriptions{% endblock %}
 
 {% block content %}
-<a id="subscriptionListLink" href="{% url 'subscription_api:list' %}">List</a>
+<a href="{% url 'subscription_api:list' user.email %}" id="subscription-list">List</a>
 
-    <div id="subscriptionList"></div>
+    <div id="subscription-container" class="row text-center"></div>
 
-{#    <script href="{% static 'js/subscription_list.js' %}"></script>#}
+    <script src="{% static 'js/subscription_list.js' %}"></script>
 {% endblock %}

@@ -12,5 +12,5 @@ urlpatterns = [
         views.Subscribe.as_view(),
         name="delete",
     ),
-    path("list/", views.SubscriptionList.as_view(), name="list"),
+    path("list/<str:email>", views.SubscriptionList.as_view(), name="list"),
 ]

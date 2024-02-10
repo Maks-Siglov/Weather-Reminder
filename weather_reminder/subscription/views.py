@@ -5,6 +5,5 @@ from users.utils import check_access_token
 
 
 @check_access_token
-def subscriptions(request: HttpRequest) -> HttpResponse:
-    print(request.user)
+def subscription_list(request: HttpRequest) -> HttpResponse:
     return render(request, "subscription/subscriptions.html")
