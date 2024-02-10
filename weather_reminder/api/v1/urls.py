@@ -2,7 +2,7 @@ from django.urls import path
 
 from api.v1 import views
 
-app_name = 'weather_api'
+app_name = "weather_api"
 
 urlpatterns = [
     path("get/<str:city>/<int:date>", views.WeatherData.as_view()),

@@ -10,7 +10,7 @@ urlpatterns = [
     path(
         "<int:subscription_id>/delete",
         views.Subscribe.as_view(),
-        name="delete"
+        name="delete",
     ),
     path("list/", views.SubscriptionList.as_view(), name="list"),
 ]
