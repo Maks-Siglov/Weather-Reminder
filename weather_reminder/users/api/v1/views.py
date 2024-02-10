@@ -26,7 +26,7 @@ class Login(APIView):
         password = request.data["password"]
 
         try:
-           user = User.objects.get(email=email)
+            user = User.objects.get(email=email)
         except ObjectDoesNotExist:
             return Response({"error": "Invalid email or password"}, status=400)
 
