@@ -58,6 +58,9 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
+
+    # "users.middleware.JWTAuthenticationMiddleware",
+
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -166,6 +169,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 AUTH_USER_MODEL = "users.User"
+
+LOGIN_URL = "/users/login/"
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/

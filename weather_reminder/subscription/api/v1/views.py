@@ -9,7 +9,7 @@ from subscription.models import Subscription
 from users.models import User
 
 
-class Subscribe(APIView):
+class SubscriptionAPI(APIView):
 
     def post(self, request: HttpRequest) -> Response:
         serializer = SubscriptionSerializer(data=request.data)

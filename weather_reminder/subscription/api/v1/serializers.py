@@ -6,4 +6,4 @@ from subscription.models import Subscription
 class SubscriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subscription
-        fields = ("city", "notification_period")
+        fields = ("pk", "user", "city", "notification_period")
