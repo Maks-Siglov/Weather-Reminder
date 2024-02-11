@@ -34,7 +34,7 @@ function createSubscriptionCard(subscription) {
     editButton.textContent = 'Edit';
     editButton.classList.add('btn', 'btn-primary', 'mr-2');
     editButton.addEventListener('click', function() {
-        const [inputField, saveButton] = editButtonAction(subscription);
+        const [inputField, saveButton] = editButtonAction(subscription.pk);
         cardBody.appendChild(inputField);
         cardBody.appendChild(saveButton);
     });
@@ -46,16 +46,26 @@ function createSubscriptionCard(subscription) {
         deleteButtonAction(subscription.pk);
     });
 
+    const sendButton = document.createElement('button');
+    sendButton.textContent = 'Send';
+    sendButton.classList.add('btn', 'btn-success', 'm-2');
+    sendButton.addEventListener('click', function() {
+        sendButtonAction(subscription);
+    });
+
+
+
     cardBody.appendChild(cityName);
     cardBody.appendChild(notificationPeriod);
     cardBody.appendChild(editButton);
     cardBody.appendChild(deleteButton);
+    cardBody.appendChild(sendButton);
     card.appendChild(cardBody);
 
     return card;
 }
 
-function editButtonAction(subscription) {
+function editButtonAction(subscriptionPk) {
     const inputField = document.createElement('input');
     inputField.type = 'number';
     inputField.placeholder = 'New notification period';
@@ -67,7 +77,7 @@ function editButtonAction(subscription) {
     saveButton.addEventListener('click', function () {
         const newNotificationPeriod = parseInt(inputField.value);
         if (!isNaN(newNotificationPeriod) && newNotificationPeriod > 0) {
-            fetch(`/api/subscription/v1/${subscription.pk}/edit`, {
+            fetch(`/api/subscription/v1/${subscriptionPk}/edit`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -97,4 +107,36 @@ function deleteButtonAction(subscriptionPk){
         .then(() => {
             window.location.reload();
         })
+}
+
+
+function sendButtonAction(subscription) {
+    fetch(`/api/weather-data/v1/get_data/${subscription.city}`, {
+        method: 'GET'
+    })
+        .then(response => response.json())
+        .then(data => {
+            const weatherDataJson = JSON.stringify(data);
+            console.log(`/api/weather-data/v1/send_email/${subscription.user}`)
+
+            fetch(`/api/weather-data/v1/send_email/${subscription.user}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')  // Include CSRF token
+                },
+                body: JSON.stringify({weather_data: weatherDataJson})
+            })
+                .then(response => response.json())
+                .then(result => {
+                    console.log(result);
+                })
+        })
+}
+
+
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
 }

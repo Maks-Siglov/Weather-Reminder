@@ -2,10 +2,14 @@ import json
 import requests
 
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail import EmailMessage
 from django.http import HttpRequest
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
+from users.models import User
 
 
 class WeatherData(APIView):
@@ -46,3 +50,24 @@ class APIWeatherData(APIView):
             return Response(data=weather_data, status=200)
 
         return Response(status=404)
+
+
+class SendWeatherEmail(APIView):
+    def post(self, request: HttpRequest, user_id: int) -> Response:
+
+        # weather_data=request.data
+        print(request.data)
+
+        try:
+            user = User.objects.get(id=user_id)
+        except ObjectDoesNotExist:
+            return Response({"error": "User not found"}, status=404)
+
+        mail = EmailMessage(
+            subject="Weather Reminder",
+            body=str(request.data),
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=(user.email,),
+        )
+        mail.send()
+        return Response({"message": "Email has been send"}, status=200)
