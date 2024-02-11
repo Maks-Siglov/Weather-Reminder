@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Subscription</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Create Subscription{% endblock %}
+
+{% block content %}
     <h2>Create Subscription</h2>
     <form id="subscription-form" action="{% url 'subscription_api:create' %}">
         <input type="hidden" id="user_id" name="user" value="{{ user.id }}">
@@ -19,27 +17,5 @@
         <button type="submit">Create Subscription</button>
     </form>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const subscriptionForm = document.getElementById('subscription-form');
-            subscriptionForm.addEventListener('submit', function (event) {
-                event.preventDefault();
-
-                const formData = new FormData(subscriptionForm);
-
-                fetch(subscriptionForm.action, {
-                    method: 'POST',
-                    body: formData,
-                })
-                .then(response => {
-                    if (response.ok) {
-                        window.location = '/subscriptions/';
-                    } else {
-                        alert('Failed to create subscription. Please try again.');
-                    }
-                })
-            });
-        });
-    </script>
-</body>
-</html>
+    <script src="{% static 'js/subscriptions/create_subscription.js' %}"></script>
+{% endblock %}

@@ -4,9 +4,8 @@
 
 {% block content %}
 <a href="{% url 'subscription_api:list' user.email %}" id="subscription-list" style="display: none"></a>
-{#    <a href="{% url 'subscription:create' %}" id="create-subscription">Create subscription</a>#}
 
     <div id="subscription-container" class="row text-center"></div>
 
-    <script src="{% static 'js/subscription_list.js' %}"></script>
+    <script src="{% static 'js/subscriptions/subscription_list.js' %}"></script>
 {% endblock %}

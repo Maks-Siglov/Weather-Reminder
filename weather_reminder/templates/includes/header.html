@@ -15,6 +15,10 @@
                     {% endif %}
 
                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'subscription:create' %}" id="create-subscription">Create subscription</a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'subscription:subscriptions' %}">My cities</a>
                     </li>
 
