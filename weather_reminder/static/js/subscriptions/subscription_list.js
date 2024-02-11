@@ -34,19 +34,16 @@ function createSubscriptionCard(subscription) {
     editButton.textContent = 'Edit';
     editButton.classList.add('btn', 'btn-primary', 'mr-2');
     editButton.addEventListener('click', function() {
-        console.log('Edit button clicked');
+        const [inputField, saveButton] = editButtonAction(subscription);
+        cardBody.appendChild(inputField);
+        cardBody.appendChild(saveButton);
     });
 
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
     deleteButton.classList.add('btn', 'btn-danger');
     deleteButton.addEventListener('click', function() {
-        fetch(`/api/subscription/v1/${subscription.pk}/delete`, {
-            method: 'DELETE'
-        })
-        .then(() => {
-            window.location.reload();
-        })
+        deleteButtonAction(subscription.pk);
     });
 
     cardBody.appendChild(cityName);
@@ -56,4 +53,48 @@ function createSubscriptionCard(subscription) {
     card.appendChild(cardBody);
 
     return card;
+}
+
+function editButtonAction(subscription) {
+    const inputField = document.createElement('input');
+    inputField.type = 'number';
+    inputField.placeholder = 'New notification period';
+    inputField.classList.add('form-control', 'm-2');
+
+    const saveButton = document.createElement('button');
+    saveButton.textContent = 'Save';
+    saveButton.classList.add('btn', 'btn-success', 'mr-2');
+    saveButton.addEventListener('click', function () {
+        const newNotificationPeriod = parseInt(inputField.value);
+        if (!isNaN(newNotificationPeriod) && newNotificationPeriod > 0) {
+            fetch(`/api/subscription/v1/${subscription.pk}/edit`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "notification_period": newNotificationPeriod
+                })
+            })
+                .then(response => {
+                    if (response.ok){
+                        window.location.reload()
+                    }
+                })
+        } else {
+            alert('Notification period should be a positive number of hours');
+        }
+    });
+
+    return [inputField, saveButton];
+}
+
+
+function deleteButtonAction(subscriptionPk){
+    fetch(`/api/subscription/v1/${subscriptionPk}/delete`, {
+            method: 'DELETE'
+        })
+        .then(() => {
+            window.location.reload();
+        })
 }
