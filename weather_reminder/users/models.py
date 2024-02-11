@@ -3,7 +3,6 @@ from django.contrib.auth.models import (
     BaseUserManager,
     PermissionsMixin,
 )
-
 from django.db import models
 
 

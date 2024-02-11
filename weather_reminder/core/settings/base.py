@@ -11,9 +11,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 import os
-
-from datetime import timedelta, datetime
+from datetime import datetime, timedelta
 from pathlib import Path
+
 from dotenv import load_dotenv
 
 load_dotenv()

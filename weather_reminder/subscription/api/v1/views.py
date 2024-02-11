@@ -1,9 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpRequest
-
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
 from subscription.api.v1.serializers import SubscriptionSerializer
 from subscription.models import Subscription
 from users.models import User

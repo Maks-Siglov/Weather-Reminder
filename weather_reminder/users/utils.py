@@ -3,11 +3,10 @@ import functools
 from django.conf import settings
 from django.http import JsonResponse
 from django.shortcuts import redirect
-
 from rest_framework_simplejwt.tokens import (
     AccessToken,
-    TokenError,
     RefreshToken,
+    TokenError,
 )
 
 

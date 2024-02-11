@@ -1,10 +1,8 @@
 from django.urls import path
-
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-
 from users.api.v1 import views
 
 app_name = "auth_api"
