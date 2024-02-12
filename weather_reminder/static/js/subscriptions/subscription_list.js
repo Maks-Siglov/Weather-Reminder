@@ -111,13 +111,13 @@ function deleteButtonAction(subscriptionPk){
 
 
 function sendButtonAction(subscription) {
-    fetch(`/api/weather-data/v1/get_data/${subscription.city}`, {
+    const city = subscription.city
+
+    fetch(`/api/weather-data/v1/get_data/${city}`, {
         method: 'GET'
     })
         .then(response => response.json())
         .then(data => {
-            const weatherDataJson = JSON.stringify(data);
-            console.log(`/api/weather-data/v1/send_email/${subscription.user}`)
 
             fetch(`/api/weather-data/v1/send_email/${subscription.user}`, {
                 method: 'POST',
@@ -125,7 +125,7 @@ function sendButtonAction(subscription) {
                     'Content-Type': 'application/json',
                     'X-CSRFToken': getCookie('csrftoken')  // Include CSRF token
                 },
-                body: JSON.stringify({weather_data: weatherDataJson})
+                body: JSON.stringify({'city': city, weather_data: data})
             })
                 .then(response => response.json())
                 .then(result => {
