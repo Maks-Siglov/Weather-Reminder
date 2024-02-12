@@ -8,7 +8,7 @@ from django.utils import timezone
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from api.v1.services.send_reminder_email import send_reminder_email
+from reminder.services.send_reminder_email import send_reminder_email
 from subscription.models import Subscription
 
 from users.models import User

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from api.v1 import views
+from reminder.api.v1 import views
 
 app_name = "weather_api"
 
