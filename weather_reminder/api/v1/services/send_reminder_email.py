@@ -7,9 +7,7 @@ from django.template.loader import render_to_string
 from users.models import User
 
 
-def send_reminder_email(data: dict, user: User) -> None:
-    weather_data = data["weather_data"]
-    city = data["city"]
+def send_reminder_email(weather_data: dict, city: str, user: User) -> None:
 
     dt = datetime.utcfromtimestamp(int(weather_data["dt"])).strftime(
         "%Y-%m-%d %H:%M:%S"
