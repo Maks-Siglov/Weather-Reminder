@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "main.apps.MainConfig",
     "users.apps.UsersConfig",
     "subscription.apps.SubscriptionConfig",
+    "reminder.apps.ReminderConfig",
 ]
 
 MIDDLEWARE = [

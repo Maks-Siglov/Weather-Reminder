@@ -6,11 +6,11 @@ from datetime import timedelta
 from django.conf import settings
 from django.utils import timezone
 
-from subscription.models import Subscription
-
 
 @shared_task
 def send_weather_reminder_email():
+    from subscription.models import Subscription
+
     subscription = Subscription.objects.all()
     current_time = timezone.now()
 
