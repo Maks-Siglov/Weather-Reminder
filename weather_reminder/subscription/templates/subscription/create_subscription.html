@@ -4,18 +4,21 @@
 {% block title %}Create Subscription{% endblock %}
 
 {% block content %}
-    <h2>Create Subscription</h2>
-    <form id="subscription-form" action="{% url 'subscription_api:create' %}">
-        <input type="hidden" id="user_id" name="user" value="{{ user.id }}">
 
-        <label for="city">City:</label><br>
-        <input type="text" id="city" name="city" required><br>
 
-        <label for="notification_period">Notification Period (in hours):</label><br>
-        <input type="number" id="notification_period" name="notification_period" required><br>
+    <div class="auth-container">
+        <div class="auth-form">
+            <h2 class="text-center">Create Subscription</h2>
+            <form id="subscription-form" action="{% url 'subscription_api:create' %}">
+                <input type="hidden" id="user_id" name="user" value="{{ user.id }}">
 
-        <button type="submit">Create Subscription</button>
-    </form>
+                <input type="text" id="city" name="city" placeholder="City" required><br>
+                <input type="number" id="notification_period" name="notification_period" placeholder="Notification Period (in hours)" required><br>
+
+                <button type="submit">Create Subscription</button>
+            </form>
+        </div>
+    </div>
 
     <script src="{% static 'js/subscriptions/create_subscription.js' %}"></script>
 {% endblock %}
