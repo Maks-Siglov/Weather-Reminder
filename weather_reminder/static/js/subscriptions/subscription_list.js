@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function createSubscriptionCard(subscription) {
     const card = document.createElement('div');
-    card.classList.add('card', 'm-2');
+    card.classList.add('card', 'm-3', 'text-white', 'bg-primary');
 
     const cardBody = document.createElement('div');
     cardBody.classList.add('card-body');
@@ -32,12 +32,17 @@ function createSubscriptionCard(subscription) {
 
     const editButton = document.createElement('button');
     editButton.textContent = 'Edit';
-    editButton.classList.add('btn', 'btn-primary', 'mr-2');
+    editButton.classList.add('btn', 'btn-secondary', 'mr-2');
     editButton.addEventListener('click', function() {
+    const existingInputField = cardBody.querySelector('input');
+    const existingSaveButton = cardBody.querySelector('.save-button');
+
+    if (!existingInputField && !existingSaveButton) {
         const [inputField, saveButton] = editButtonAction(subscription.pk);
         cardBody.appendChild(inputField);
         cardBody.appendChild(saveButton);
-    });
+    }
+});
 
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
