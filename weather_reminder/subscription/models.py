@@ -11,3 +11,9 @@ class Subscription(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ("user", "city")
+
+    def __str__(self):
+        return f"{self.user} to {self.city} for {self.notification_period}"
