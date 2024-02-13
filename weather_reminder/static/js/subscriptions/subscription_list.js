@@ -41,25 +41,45 @@ function createSubscriptionCard(subscription) {
 
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
-    deleteButton.classList.add('btn', 'btn-danger');
+    deleteButton.classList.add('btn', 'btn-danger','mr-2');
     deleteButton.addEventListener('click', function() {
         deleteButtonAction(subscription.pk);
     });
 
     const sendButton = document.createElement('button');
     sendButton.textContent = 'Send';
-    sendButton.classList.add('btn', 'btn-success', 'm-2');
+    sendButton.classList.add('btn', 'btn-info', 'mr-2');
     sendButton.addEventListener('click', function() {
         sendButtonAction(subscription);
     });
-
-
 
     cardBody.appendChild(cityName);
     cardBody.appendChild(notificationPeriod);
     cardBody.appendChild(editButton);
     cardBody.appendChild(deleteButton);
     cardBody.appendChild(sendButton);
+
+    if (subscription.is_enabled) {
+        const disableButton = document.createElement('button');
+        disableButton.textContent = 'Disable';
+        disableButton.classList.add('btn', 'btn-warning', 'mr-2');
+        disableButton.addEventListener('click', function () {
+            disableButtonAction(subscription.pk);
+            cardBody.removeChild(sendButton)
+        });
+        cardBody.appendChild(disableButton)
+    } else if (!subscription.is_enabled){
+        const enableButton = document.createElement('button');
+        enableButton.textContent = 'Enable';
+        enableButton.classList.add('btn', 'btn-success', 'mr-2');
+        enableButton.addEventListener('click', function () {
+            enableButtonAction(subscription.pk);
+            cardBody.appendChild(sendButton);
+        });
+        cardBody.appendChild(enableButton)
+    }
+
+
     card.appendChild(cardBody);
 
     return card;
@@ -131,6 +151,24 @@ function sendButtonAction(subscription) {
                 .then(result => {
                     console.log(result);
                 })
+        })
+}
+
+function disableButtonAction(subscription_pk) {
+    fetch(`/api/subscription/v1/${subscription_pk}/disable`, {
+            method: 'POST'
+        })
+        .then(() => {
+            window.location.reload();
+        })
+}
+
+function enableButtonAction(subscription_pk) {
+    fetch(`/api/subscription/v1/${subscription_pk}/enable`, {
+            method: 'POST'
+        })
+        .then(() => {
+            window.location.reload();
         })
 }
 

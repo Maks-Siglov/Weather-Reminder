@@ -7,6 +7,7 @@ class Subscription(models.Model):
     city = models.CharField(max_length=50)
     notification_period = models.PositiveIntegerField(default=24)
     last_notification_time = models.DateTimeField(default=timezone.now)
+    is_enabled = models.BooleanField(default=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

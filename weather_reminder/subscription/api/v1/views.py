@@ -50,3 +50,38 @@ class SubscriptionList(APIView):
         subscriptions = Subscription.objects.filter(user=user)
         serializer = SubscriptionSerializer(subscriptions, many=True)
         return Response(serializer.data, status=200)
+
+
+class DisableSubscription(APIView):
+    def post(self, request: HttpRequest, subscription_id: int):
+        print('asdgasdgs')
+        try:
+            subscription = Subscription.objects.get(pk=subscription_id)
+        except ObjectDoesNotExist:
+            return Response({"error": "Subscription not found"}, status=404)
+
+        if not subscription.is_enabled:
+            return Response(
+                {"message": "Subscription already disabled"}, status=200
+            )
+
+        subscription.is_enabled = False
+        subscription.save()
+        return Response({"message": "Subscription disabled"}, status=200)
+
+
+class EnableSubscription(APIView):
+    def post(self, request: HttpRequest, subscription_id: int):
+        try:
+            subscription = Subscription.objects.get(pk=subscription_id)
+        except ObjectDoesNotExist:
+            return Response({"error": "Subscription not found"}, status=404)
+
+        if subscription.is_enabled:
+            return Response(
+                {"message": "Subscription already enabled"}, status=200
+            )
+
+        subscription.is_enabled = True
+        subscription.save()
+        return Response({"message": "Subscription enabled"}, status=200)

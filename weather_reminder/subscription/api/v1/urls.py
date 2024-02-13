@@ -16,4 +16,14 @@ urlpatterns = [
         name="delete",
     ),
     path("list/<str:email>", views.SubscriptionList.as_view(), name="list"),
+    path(
+        "<int:subscription_id>/disable",
+        views.DisableSubscription.as_view(),
+        name="disable_subscription"
+    ),
+    path(
+        "<int:subscription_id>/enable",
+        views.EnableSubscription.as_view(),
+        name="enable_subscription"
+    ),
 ]
