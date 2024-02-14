@@ -29,13 +29,30 @@ Clone the Repository:
     python manage.py migrate
     ```
 
-4. Run the development server:
+4. Load Dumpdata:
+
+    ```bash
+    python manage.py loaddata fixtures/dumpdata.json
+    ```
+
+5. Superuser:
+
+   - **Create a Superuser:**
+     ```bash
+     python manage.py createsuperuser
+     ```
+
+   - **Or Login as the already created Admin:**
+     - **Email:** admin@gmail.com
+     - **Password:** 336611qq
+
+6. Run the development server:
 
     ```bash
     python manage.py runserver
     ```
 
-5. Visit `http://127.0.0.1:8000/admin/` to log in with your superuser account and start using WeatherReminder.
+7. Visit `http://127.0.0.1:8000/admin/` to log in with your superuser account and start using WeatherReminder.
 
 ### Enable extended functionality
 
