@@ -3,7 +3,7 @@
 {% block title %}My Subscriptions{% endblock %}
 
 {% block content %}
-<a href="{% url 'subscription_api:list' user.email %}" id="subscription-list" style="display: none"></a>
+<a href="{% url 'subscription_api:list' user.username %}" id="subscription-list" style="display: none"></a>
 
     <div id="subscription-container" class="row text-center"></div>
 

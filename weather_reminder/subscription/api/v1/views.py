@@ -40,12 +40,12 @@ class SubscriptionAPI(APIView):
 
 class SubscriptionList(APIView):
 
-    def get(self, request: HttpRequest, email: str) -> Response:
+    def get(self, request: HttpRequest, username: str) -> Response:
         try:
-            user = User.objects.get(email=email)
+            user = User.objects.get(username=username)
         except ObjectDoesNotExist:
             return Response(
-                {"error": f"User with email {email} not found"}, status=404
+                {"error": f"User {username} not found"}, status=404
             )
         subscriptions = Subscription.objects.filter(user=user)
         serializer = SubscriptionSerializer(subscriptions, many=True)

@@ -15,7 +15,7 @@ urlpatterns = [
         views.SubscriptionAPI.as_view(),
         name="delete",
     ),
-    path("list/<str:email>", views.SubscriptionList.as_view(), name="list"),
+    path("list/<str:username>", views.SubscriptionList.as_view(), name="list"),
     path(
         "<int:subscription_id>/disable",
         views.DisableSubscription.as_view(),
