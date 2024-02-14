@@ -65,6 +65,91 @@ Clone the Repository:
     EMAIL_HOST_PASSWORD='Replace with your app password'    
     ```
 
+
+## API Routes
+
+### Authorization
+
+##### Register:
+- **Endpoint:** `/api/auth/v1/register/`
+- **Method:** POST
+- **Description:** Registration for a user. Request example:
+```json
+{
+  "username": "test_username",
+  "email": "some@gmail.com",
+  "password": "2277744qq",
+  "confirm_password": "2277744qq"
+}
+```
+
+##### Login:
+- **Endpoint:** `/api/auth/v1/login/`
+- **Method:** POST
+- **Description:** Login for a user. Request example:
+```json
+{
+  "email": "some@gmail.com",
+  "password": "2277744qq"
+}
+```
+
+
+##### Logout:
+- **Endpoint:** `/api/auth/v1/logout/`
+- **Method:** POST
+- **Description:** Logout for a user
+
+
+### Subscription
+
+##### Create:
+- **Endpoint:** `/api/subscription/v1/create`
+- **Method:** POST
+- **Description:** Create subscription notification_period = 24 by default. Request example:
+```json
+{
+  "user": 1,
+  "city": "Kiev",
+  "notification_period": 12
+}
+```
+
+##### Edit:
+- **Endpoint:** `/api/subscription/v1/<int:subscription_id>/edit`
+- **Method:** PUT
+- **Description:** Change subscription's notification_period . Request example:
+```json
+{
+  "notification_period": 20
+}
+```
+
+##### Delete:
+- **Endpoint:** `/api/subscription/v1/<int:subscription_id>/delete`
+- **Method:** DELETE
+- **Description:** Delete subscription by id
+
+
+##### Subscriptions List:
+- **Endpoint:** `/api/subscription/v1/list/<str:username>`
+- **Method:** GET
+- **Description:** Return user's subscriptions
+
+
+##### Disable subscription:
+- **Endpoint:** `/api/subscription/v1/<int:subscription_id>/disable`
+- **Method:** POST
+- **Description:** Notifications will not be sent to the disabled subscription
+
+
+##### Enable subscription:
+- **Endpoint:** `/api/subscription/v1/<int:subscription_id>/enable`
+- **Method:** POST
+- **Description:** Enable disabled subscription
+
+
+
 ## Usage
 
 - Register an Account:
