@@ -54,7 +54,7 @@ class SubscriptionList(APIView):
 
 class DisableSubscription(APIView):
     def post(self, request: HttpRequest, subscription_id: int):
-        print('asdgasdgs')
+        print("asdgasdgs")
         try:
             subscription = Subscription.objects.get(pk=subscription_id)
         except ObjectDoesNotExist:

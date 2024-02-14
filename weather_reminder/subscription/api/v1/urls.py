@@ -19,11 +19,11 @@ urlpatterns = [
     path(
         "<int:subscription_id>/disable",
         views.DisableSubscription.as_view(),
-        name="disable_subscription"
+        name="disable",
     ),
     path(
         "<int:subscription_id>/enable",
         views.EnableSubscription.as_view(),
-        name="enable_subscription"
+        name="enable",
     ),
 ]
