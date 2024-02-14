@@ -54,7 +54,7 @@ Clone the Repository:
 
 7. Visit `http://127.0.0.1:8000/admin/` to log in with your superuser account and start using WeatherReminder.
 
-### Enable extended functionality
+## Enable extended functionality
 
 1. Project use email for sending reminder message. For using this feature add your email data in .env file
     - **Replace data in .env file**
