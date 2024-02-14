@@ -75,7 +75,10 @@ def test_subscription_list_api(
     client.login(username=test_user.email, password=test_user.password)
 
     response = client.get(
-        reverse("subscription_api:list", kwargs={"email": test_user.email})
+        reverse(
+            "subscription_api:list",
+            kwargs={"username": test_user.username}
+        )
     )
 
     assert response.status_code == 200
