@@ -30,8 +30,14 @@ class UserAdmin(BaseUserAdmin):
         (None, {
             "classes": ("wide",),
             "fields": (
-            "email", "username", "password1", "password2", "is_active",
-            "is_staff", "is_superuser"),
+                "email",
+                "username",
+                "password1",
+                "password2",
+                "is_active",
+                "is_staff",
+                "is_superuser",
+            ),
         }),
     )
     ordering = ("-created_at",)
