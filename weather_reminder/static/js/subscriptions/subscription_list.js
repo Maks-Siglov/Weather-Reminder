@@ -8,21 +8,64 @@ document.addEventListener('DOMContentLoaded', function () {
             'Authorization': `Bearer ${getCookie('access_token')}`
         }
     })
-        .then(response => response.json())
-        .then(response => {
-            if (response.status === 200) {
-                response.json()
-                    .then(data => {
-                        data.forEach(subscription => {
-                            const card = createSubscriptionCard(subscription);
-                            subscriptionContainer.appendChild(card);
+    .then(response => {
+
+        if (response.status === 200) {
+            response.json()
+            .then(data => {
+                data.forEach(subscription => {
+                    const card = createSubscriptionCard(subscription);
+                    subscriptionContainer.appendChild(card);
+                });
+            });
+        } else if (response.status === 401) {
+            fetch('/api/auth/v1/token/refresh/', {
+                method: 'POST',
+                body: JSON.stringify({
+                    'refresh': getCookie('refresh_token')
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    window.location = '/users/login/';
+                    throw new Error('Failed to refresh token');
+                }
+            })
+            .then(data => {
+                const newAccess = data.access;
+
+                fetch(subscriptionListLink.href, {
+                    method: "GET",
+                    headers: {
+                        'Authorization': `Bearer ${newAccess}`
+                    }
+                })
+                .then(response => {
+                    if (response.status === 200) {
+                        response.json()
+                        .then(data => {
+                            data.forEach(subscription => {
+                                const card = createSubscriptionCard(subscription);
+                                subscriptionContainer.appendChild(card);
+                            });
                         });
-                    });
-            } else if (staus.response == 401) {
-                window.location = '/users/login/'
-            }
-        });
+                    } else if (response.status === 401) {
+                        window.location = '/users/login/';
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Error refreshing token:', error);
+            });
+        }
+    });
 });
+
 
 
 
