@@ -13,20 +13,27 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
             .then(response => {
+                console.log('response')
                 if (response.ok) {
                     window.location = '/subscriptions/';
-                } else if (response.status == 401) {
+                } else if (response.status === 401) {
+                    console.log('401')
 
                     fetch('/api/auth/v1/token/refresh/', {
                         method: 'POST',
-                        body: {
+                        body: JSON.stringify({
                             'refresh': getCookie('refresh_token')
+                        }),
+                        headers: {
+                            'Content-Type': 'application/json'
                         }
                     })
                         .then(response => {
+                            console.log(response.status)
                             if (response.ok) {
                                 const newAccess = response.access
-                                console.log('newaccess', newAccess);
+                                console.log('newAccess')
+                                document.cookie = `access_token=${newAccess}; path=/`
 
                                 fetch(subscriptionForm.action, {
                                     method: 'POST',
@@ -34,9 +41,12 @@ document.addEventListener('DOMContentLoaded', function () {
                                     headers: {
                                         'Authorization': `Bearer ${newAccess}`
                                     }
-                                });
+                                })
+                                    .then(response => {
+                                        window.location = '/subscriptions/'
+                                    })
 
-                            } else {
+                            } else if (response.status === 401) {
                                 window.location = '/users/login/';
                             }
                         });

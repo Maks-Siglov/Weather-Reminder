@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .then(data => {
                 const newAccess = data.access;
+                document.cookie = `access_token=${newAccess}; path=/`
 
                 fetch(subscriptionListLink.href, {
                     method: "GET",
