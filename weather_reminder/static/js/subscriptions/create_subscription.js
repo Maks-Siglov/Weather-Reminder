@@ -41,8 +41,13 @@ document.addEventListener('DOMContentLoaded', function () {
                                     }
                                 })
                                     .then(response => {
-                                        window.location = '/subscriptions/'
+                                        if (response.ok) {
+                                            window.location = '/subscriptions/'
+                                        } else if (response.status === 401) {
+                                            window.location = '/users/login/';
+                                        }
                                     })
+
 
                             } else if (response.status === 400) {
                                 displayErrors(response)
