@@ -13,11 +13,9 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
             .then(response => {
-                console.log('response')
                 if (response.ok) {
                     window.location = '/subscriptions/';
                 } else if (response.status === 401) {
-                    console.log('401')
 
                     fetch('/api/auth/v1/token/refresh/', {
                         method: 'POST',
@@ -29,10 +27,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     })
                         .then(response => {
-                            console.log(response.status)
                             if (response.ok) {
                                 const newAccess = response.access
-                                console.log('newAccess')
                                 document.cookie = `access_token=${newAccess}; path=/`
 
                                 fetch(subscriptionForm.action, {

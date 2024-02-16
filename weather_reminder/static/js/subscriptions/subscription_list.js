@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             });
         } else if (response.status === 401) {
+
             fetch('/api/auth/v1/token/refresh/', {
                 method: 'POST',
                 body: JSON.stringify({
