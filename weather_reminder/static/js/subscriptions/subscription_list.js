@@ -4,15 +4,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
     fetch(subscriptionListLink.href, {
         method: "GET",
+        headers: {
+            'Authorization': `Bearer ${getCookie('access_token')}`
+        }
     })
         .then(response => response.json())
-        .then(data => {
-            data.forEach(subscription => {
-                const card = createSubscriptionCard(subscription)
-                subscriptionContainer.appendChild(card)
-            })
-        })
+        .then(response => {
+            if (response.status === 200) {
+                response.json()
+                    .then(data => {
+                        data.forEach(subscription => {
+                            const card = createSubscriptionCard(subscription);
+                            subscriptionContainer.appendChild(card);
+                        });
+                    });
+            } else if (staus.response == 401) {
+                window.location = '/users/login/'
+            }
+        });
 });
+
 
 
 function createSubscriptionCard(subscription) {
