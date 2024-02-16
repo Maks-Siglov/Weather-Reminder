@@ -44,6 +44,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                         window.location = '/subscriptions/'
                                     })
 
+                            } else if (response.status === 400) {
+                                displayErrors(response)
                             } else if (response.status === 401) {
                                 window.location = '/users/login/';
                             }
@@ -55,11 +57,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function displayErrors(response) {
     response.json().then(data => {
-        const errors = data.non_field_errors;
+        const errors = data.non_field_errors
         const errorContainer = document.getElementById('error-display');
-        console.log(errorContainer)
+        errorContainer.innerHTML = ''
         errors.forEach(error => {
             const errorListItem = document.createElement('li');
+            if (error === 'The fields user, city must make a unique set.'){
+                error = 'You already has subscription to this city'
+            }
             errorListItem.textContent = error;
             errorContainer.appendChild(errorListItem);
         });
