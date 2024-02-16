@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => {
                 if (response.ok) {
                     window.location = '/subscriptions/';
+                } else if (response.status === 400) {
+                    displayErrors(response)
                 } else if (response.status === 401) {
 
                     fetch('/api/auth/v1/token/refresh/', {
@@ -50,6 +52,19 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     });
 });
+
+function displayErrors(response) {
+    response.json().then(data => {
+        const errors = data.non_field_errors;
+        const errorContainer = document.getElementById('error-display');
+        console.log(errorContainer)
+        errors.forEach(error => {
+            const errorListItem = document.createElement('li');
+            errorListItem.textContent = error;
+            errorContainer.appendChild(errorListItem);
+        });
+    });
+}
 
 function getCookie(name) {
     const value = `; ${document.cookie}`;
