@@ -15,10 +15,33 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => {
                 if (response.ok) {
                     window.location = '/subscriptions/';
-                } else  if (response.status == 401 ){
-                    window.location = '/users/login/';
+                } else if (response.status == 401) {
+
+                    fetch('/api/auth/v1/token/refresh/', {
+                        method: 'POST',
+                        body: {
+                            'refresh': getCookie('refresh_token')
+                        }
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                const newAccess = response.access
+                                console.log('newaccess', newAccess);
+
+                                fetch(subscriptionForm.action, {
+                                    method: 'POST',
+                                    body: formData,
+                                    headers: {
+                                        'Authorization': `Bearer ${newAccess}`
+                                    }
+                                });
+
+                            } else {
+                                window.location = '/users/login/';
+                            }
+                        });
                 }
-            })
+            });
     });
 });
 
