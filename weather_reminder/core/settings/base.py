@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     "rest_framework",
+    "celery",
 
     "main.apps.MainConfig",
     "users.apps.UsersConfig",
@@ -208,3 +209,9 @@ EMAIL_USE_SSL = False
 OPEN_WEATHER_KEY = os.getenv("OPEN_WEATHER_API_KEY")
 DEFAULT_UNITS = "metric"
 API_URL = "https://api.openweathermap.org/data/2.5/forecast"
+
+#
+# CELERY_BROKER_URL = "redis://localhost:6379"
+# CELERY_RESULT_BACKEND = "redis://localhost:6379"
+# CELERY_ACCEPT_CONTENT = ("application/json",)
+# CELERY_RESULT_SERIALIZER = 'json'

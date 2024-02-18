@@ -13,4 +13,9 @@ urlpatterns = [
         views.SendWeatherEmail.as_view(),
         name="send_email"
     ),
+    path(
+        "get_subscription/",
+        views.NotificationSubscription.as_view(),
+        name="get_subscription"
+    )
 ]
