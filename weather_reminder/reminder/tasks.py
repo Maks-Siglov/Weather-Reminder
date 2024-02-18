@@ -1,8 +1,12 @@
 import requests
 
+from datetime import datetime
+
 from celery import shared_task
 
 from django.conf import settings
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
 
 
 @shared_task
@@ -24,9 +28,24 @@ def get_weather_data(city):
 
 @shared_task
 def send_email(subscription, weather_data):
-    post_url = (
-        f"http://{settings.DOMAIN}/api/weather-data/v1/send_email/"
-        f"{subscription['user']}"
+    dt = datetime.utcfromtimestamp(int(weather_data["dt"])).strftime(
+        "%Y-%m-%d %H:%M:%S"
     )
-    data = {"weather_data": weather_data, "city": subscription["city"]}
-    requests.post(post_url, json=data)
+    email_context = {
+        "city": subscription["city"],
+        "dt_txt": dt,
+        "main": weather_data["main"],
+        "weather_description": weather_data["weather"][0]["description"],
+        "wind_speed": weather_data["wind"]["speed"],
+        "humidity": weather_data["main"]["humidity"],
+        "cloudiness": weather_data["clouds"]["all"],
+    }
+    email_body = render_to_string("emails/reminder_email.html", email_context)
+
+    mail = EmailMessage(
+        subject="Weather Reminder",
+        body=email_body,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        to=(subscription["user_email"],),
+    )
+    mail.send()

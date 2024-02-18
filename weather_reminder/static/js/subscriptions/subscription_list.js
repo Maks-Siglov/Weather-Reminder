@@ -69,8 +69,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-
-
 function createSubscriptionCard(subscription) {
     const card = document.createElement('div');
     card.classList.add('card', 'm-3', 'text-white', 'bg-primary');
@@ -107,18 +105,10 @@ function createSubscriptionCard(subscription) {
         deleteButtonAction(subscription.pk);
     });
 
-    const sendButton = document.createElement('button');
-    sendButton.textContent = 'Send';
-    sendButton.classList.add('btn', 'btn-info', 'mr-2');
-    sendButton.addEventListener('click', function() {
-        sendButtonAction(subscription);
-    });
-
     cardBody.appendChild(cityName);
     cardBody.appendChild(notificationPeriod);
     cardBody.appendChild(editButton);
     cardBody.appendChild(deleteButton);
-    cardBody.appendChild(sendButton);
 
     if (subscription.is_enabled) {
         const disableButton = document.createElement('button');
@@ -126,7 +116,6 @@ function createSubscriptionCard(subscription) {
         disableButton.classList.add('btn', 'btn-warning', 'mr-2');
         disableButton.addEventListener('click', function () {
             disableButtonAction(subscription.pk);
-            cardBody.removeChild(sendButton)
         });
         cardBody.appendChild(disableButton)
     } else if (!subscription.is_enabled){
@@ -135,7 +124,6 @@ function createSubscriptionCard(subscription) {
         enableButton.classList.add('btn', 'btn-success', 'mr-2');
         enableButton.addEventListener('click', function () {
             enableButtonAction(subscription.pk);
-            cardBody.appendChild(sendButton);
         });
         cardBody.appendChild(enableButton)
     }
@@ -187,31 +175,6 @@ function deleteButtonAction(subscriptionPk){
         })
         .then(() => {
             window.location.reload();
-        })
-}
-
-
-function sendButtonAction(subscription) {
-    const city = subscription.city
-
-    fetch(`/api/weather-data/v1/get_data/${city}`, {
-        method: 'GET'
-    })
-        .then(response => response.json())
-        .then(data => {
-
-            fetch(`/api/weather-data/v1/send_email/${subscription.user}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': getCookie('csrftoken')  // Include CSRF token
-                },
-                body: JSON.stringify({'city': city, weather_data: data})
-            })
-                .then(response => response.json())
-                .then(result => {
-                    console.log(result);
-                })
         })
 }
 
