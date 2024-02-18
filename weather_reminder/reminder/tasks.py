@@ -1,8 +1,10 @@
+import time
+
 import requests
 
-from datetime import datetime
-
 from celery import shared_task
+from datetime import datetime
+from threading import Thread
 
 from django.conf import settings
 from django.core.mail import EmailMessage
@@ -14,9 +16,20 @@ def send_subscription_email():
     subscriptions = requests.get(
         f"http://{settings.DOMAIN}/api/weather-data/v1/get_subscription/"
     ).json()
+    threads = []
     for subscription in subscriptions:
-        weather_data = get_weather_data(subscription["city"])
-        send_email(subscription, weather_data)
+        thread = Thread(target=make_notification, args=(subscription,))
+        threads.append(thread)
+        thread.start()
+
+    for thread in threads:
+        thread.join()
+
+
+@shared_task
+def make_notification(subscription):
+    weather_data = get_weather_data(subscription["city"])
+    send_email(subscription, weather_data)
 
 
 @shared_task
