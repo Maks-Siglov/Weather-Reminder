@@ -33,7 +33,7 @@ class APIWeatherData(APIView):
 
 
 class NotificationSubscription(APIView):
-    def get(self, request: HttpRequest):
+    def get(self, request: HttpRequest) -> Response:
         notification_time = timezone.now()
 
         time_difference_expression = ExpressionWrapper(
@@ -51,6 +51,19 @@ class NotificationSubscription(APIView):
         subscriptions = subscriptions_with_time_dif.filter(
             is_enabled=True,
             time_difference_hours__gte=F("notification_period"),
-        )
+        ).select_related("user")
         serializer = UserSubscriptionSerializer(subscriptions, many=True)
+
         return Response(serializer.data)
+
+
+class UpdateLastNotificationTime(APIView):
+    def post(self, request: HttpRequest) -> Response:
+        subscription_ids = request.data.get("subscription_ids", [])
+        subscriptions = Subscription.objects.filter(id__in=subscription_ids)
+        now = timezone.now()
+        for subscription in subscriptions:
+            subscription.last_notification_time = now
+            subscription.save()
+
+        return Response(status=200)

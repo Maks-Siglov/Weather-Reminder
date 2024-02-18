@@ -1,8 +1,9 @@
-import time
-
 import requests
+import typing as t
 
 from celery import shared_task
+from celery.signals import task_success
+
 from datetime import datetime
 from threading import Thread
 
@@ -27,20 +28,22 @@ def send_subscription_email():
 
 
 @shared_task
-def make_notification(subscription):
+def make_notification(subscription: dict[str, t.Any]) -> None:
     weather_data = get_weather_data(subscription["city"])
     send_email(subscription, weather_data)
 
 
 @shared_task
-def get_weather_data(city):
+def get_weather_data(city: str):
     return requests.get(
         f"http://{settings.DOMAIN}/api/weather-data/v1/get_data/{city}"
     ).json()
 
 
 @shared_task
-def send_email(subscription, weather_data):
+def send_email(
+        subscription: dict[str, t.Any], weather_data: dict[str, t.Any]
+) -> None:
     dt = datetime.utcfromtimestamp(int(weather_data["dt"])).strftime(
         "%Y-%m-%d %H:%M:%S"
     )
@@ -62,3 +65,15 @@ def send_email(subscription, weather_data):
         to=(subscription["user_email"],),
     )
     mail.send()
+
+
+@task_success.connect(sender=send_subscription_email)
+def update_last_notification_time(subscriptions, **kwargs) -> None:
+    subscription_ids = []
+    for subscription in subscriptions:
+        subscription_ids.append(subscription["pk"])
+    response = requests.post(
+        f"http://{settings.DOMAIN}/api/weather-data/v1/"
+        f"update-last-notification-time/",
+        json={"subscription_ids": subscription_ids}
+    )

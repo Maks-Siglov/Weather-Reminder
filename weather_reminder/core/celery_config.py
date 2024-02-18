@@ -9,7 +9,7 @@ os.environ.setdefault(
     "DJANGO_SETTINGS_MODULE", "core.settings.dev"
 )
 
-app = Celery("reminder", broker="amqp://guest:guest@localhost:5672/")
+app = Celery("reminder", broker="redis://localhost:6379/0")
 
 app.config_from_object("django.conf:settings", namespace="CELERY")
 
