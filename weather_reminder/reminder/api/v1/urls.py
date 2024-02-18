@@ -11,11 +11,11 @@ urlpatterns = [
     path(
         "send_email/<int:user_id>",
         views.SendWeatherEmail.as_view(),
-        name="send_email"
+        name="send_email",
     ),
     path(
         "get_subscription/",
         views.NotificationSubscription.as_view(),
-        name="get_subscription"
-    )
+        name="get_subscription",
+    ),
 ]

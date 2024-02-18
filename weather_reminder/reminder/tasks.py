@@ -28,8 +28,5 @@ def send_email(subscription, weather_data):
         f"http://{settings.DOMAIN}/api/weather-data/v1/send_email/"
         f"{subscription['user']}"
     )
-    data = {
-        "weather_data": weather_data,
-        "city": subscription["city"]
-    }
+    data = {"weather_data": weather_data, "city": subscription["city"]}
     requests.post(post_url, json=data)

@@ -65,21 +65,20 @@ class NotificationSubscription(APIView):
         notification_time = timezone.now()
 
         time_difference_expression = ExpressionWrapper(
-            notification_time - F('last_notification_time'),
-            output_field=DurationField()
+            notification_time - F("last_notification_time"),
+            output_field=DurationField(),
         )
         subscriptions_with_time_dif = Subscription.objects.annotate(
             time_difference_hours=ExpressionWrapper(
-                ExtractDay(time_difference_expression)*24 +
-                ExtractHour(time_difference_expression) +
-                ExtractMinute(time_difference_expression)/60,
-                output_field=IntegerField()
+                ExtractDay(time_difference_expression) * 24
+                + ExtractHour(time_difference_expression)
+                + ExtractMinute(time_difference_expression) / 60,
+                output_field=IntegerField(),
             )
         )
         subscriptions = subscriptions_with_time_dif.filter(
             is_enabled=True,
-            time_difference_hours__gte=F('notification_period')
+            time_difference_hours__gte=F("notification_period"),
         )
-
         serializer = SubscriptionSerializer(subscriptions, many=True)
         return Response(serializer.data)
