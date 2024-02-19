@@ -14,7 +14,7 @@ def test_auth(client: Client):
         "username": "test_user",
         "email": "test_email@gmail.com",
         "password": "test_password",
-        "confirm_password": "test_password"
+        "confirm_password": "test_password",
     }
     response = client.post(reverse("auth_api:register"), register_post_data)
     assert response.status_code == 200
@@ -27,21 +27,17 @@ def test_auth(client: Client):
 
     login_post_data = {
         "email": "test_email@gmail.com",
-        "password": "test_password"
+        "password": "test_password",
     }
 
     response = client.post(reverse("auth_api:login"), login_post_data)
     assert response.status_code == 200
 
-    login_required_response = client.get(
-        reverse("subscription:subscriptions")
-    )
+    login_required_response = client.get(reverse("subscription:subscriptions"))
     assert login_required_response.status_code == 200
 
     response = client.post(reverse("auth_api:logout"))
     assert response.status_code == 200
 
-    login_required_response = client.get(
-        reverse("subscription:subscriptions")
-    )
+    login_required_response = client.get(reverse("subscription:subscriptions"))
     assert login_required_response.status_code == 302

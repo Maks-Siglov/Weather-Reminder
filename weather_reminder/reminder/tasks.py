@@ -1,13 +1,9 @@
-import time
-
 import requests
 import typing as t
 
-from celery import shared_task
-from celery.signals import task_success, task_postrun
-
 from datetime import datetime
 from threading import Thread
+from celery import shared_task
 
 from django.conf import settings
 from django.core.mail import EmailMessage
@@ -46,7 +42,7 @@ def get_weather_data(city: str):
 
 @shared_task
 def send_email(
-        subscription: dict[str, t.Any], weather_data: dict[str, t.Any]
+    subscription: dict[str, t.Any], weather_data: dict[str, t.Any]
 ) -> None:
     dt = datetime.utcfromtimestamp(int(weather_data["dt"])).strftime(
         "%Y-%m-%d %H:%M:%S"
@@ -79,5 +75,5 @@ def update_last_notification_time(subscriptions) -> None:
     requests.post(
         f"http://{settings.DOMAIN}/api/weather-data/v1/"
         f"update-last-notification-time/",
-        json={"subscription_ids": subscription_ids}
+        json={"subscription_ids": subscription_ids},
     )

@@ -1,12 +1,12 @@
 import json
-
 import pytest
-from django.core.exceptions import ObjectDoesNotExist
 
-from django.test.client import Client
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import reverse
+from django.test.client import Client
 
 from subscription.models import Subscription
+
 from users.models import User
 
 
@@ -76,8 +76,7 @@ def test_subscription_list_api(
 
     response = client.get(
         reverse(
-            "subscription_api:list",
-            kwargs={"username": test_user.username}
+            "subscription_api:list", kwargs={"username": test_user.username}
         )
     )
 

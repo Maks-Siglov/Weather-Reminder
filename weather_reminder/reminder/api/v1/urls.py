@@ -17,5 +17,5 @@ urlpatterns = [
         "update-last-notification-time/",
         views.UpdateLastNotificationTime.as_view(),
         name="update_last_notification_time",
-    )
+    ),
 ]

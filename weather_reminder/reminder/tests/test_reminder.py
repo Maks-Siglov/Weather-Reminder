@@ -1,5 +1,5 @@
-from django.test.client import Client
 from django.shortcuts import reverse
+from django.test.client import Client
 
 
 def test_get_weather_data_api(client: Client):

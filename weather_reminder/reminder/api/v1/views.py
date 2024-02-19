@@ -1,8 +1,8 @@
 import requests
 
 from django.conf import settings
-from django.db.models import ExpressionWrapper, F, DurationField, IntegerField
-from django.db.models.functions import ExtractHour, ExtractMinute, ExtractDay
+from django.db.models import DurationField, ExpressionWrapper, F, IntegerField
+from django.db.models.functions import ExtractDay, ExtractHour, ExtractMinute
 from django.http import HttpRequest
 from django.utils import timezone
 

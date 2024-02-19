@@ -1,4 +1,5 @@
 from django.urls import path
+
 from subscription.api.v1 import views
 
 app_name = "subscription_api"

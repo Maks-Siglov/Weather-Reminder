@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+
 from users.models import User
 
 
@@ -27,18 +28,21 @@ class UserAdmin(BaseUserAdmin):
         ("Important dates", {"fields": ("last_login",)}),
     )
     add_fieldsets = (
-        (None, {
-            "classes": ("wide",),
-            "fields": (
-                "email",
-                "username",
-                "password1",
-                "password2",
-                "is_active",
-                "is_staff",
-                "is_superuser",
-            ),
-        }),
+        (
+            None,
+            {
+                "classes": ("wide",),
+                "fields": (
+                    "email",
+                    "username",
+                    "password1",
+                    "password2",
+                    "is_active",
+                    "is_staff",
+                    "is_superuser",
+                ),
+            },
+        ),
     )
     ordering = ("-created_at",)
     readonly_fields = ("last_login",)
