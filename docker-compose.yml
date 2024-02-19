@@ -1,0 +1,58 @@
+services:
+  weather-reminder:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./weather_reminder:/weather_reminder
+    environment:
+      - DB_HOST=database
+      - DB_NAME=weather_reminder
+      - DB_USER=admin
+      - DB_PASSWORD=admin
+
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+
+    depends_on:
+      - database
+
+  database:
+    image: postgres:16.2-alpine3.19
+    environment:
+      - POSTGRES_DB=weather_reminder
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+
+  worker:
+    build:
+      context: .
+    hostname: worker
+    entrypoint: celery
+    command: -A core worker --loglevel=info
+    volumes:
+      - ./weather_reminder:/weather_reminder
+    links:
+      - redis
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7.2.4-alpine
+    hostname: redis
+
+  flower:
+    build:
+      context: .
+    hostname: flower
+    command: sh -c "celery -A core flower --address=0.0.0.0 --port=5555"
+    volumes:
+      - ./weather_reminder:/weather_reminder
+    links:
+      - redis
+    depends_on:
+      - redis
+    ports:
+      - "5555:5555"
+

@@ -211,7 +211,6 @@ DEFAULT_UNITS = "metric"
 API_URL = "https://api.openweathermap.org/data/2.5/forecast"
 
 
-# CELERY_BROKER_URL = "redis://localhost:6379"
-# CELERY_RESULT_BACKEND = "redis://localhost:6379"
-# CELERY_ACCEPT_CONTENT = ("application/json",)
-# CELERY_RESULT_SERIALIZER = 'json'
+CELERY_BROKER_URL = "redis://redis:6379/0"
+CELERY_ACCEPT_CONTENT = ("application/json",)
+CELERY_RESULT_SERIALIZER = 'json'
