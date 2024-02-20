@@ -79,10 +79,8 @@ def send_email(
 @task_success.connect(sender="reminder.tasks.send_subscription_email")
 def update_last_notification_time(subscriptions, **kwargs) -> None:
     subscription_ids = []
-    print('start', subscriptions, kwargs)
     for subscription in subscriptions:
         subscription_ids.append(subscription["pk"])
-    print('sub', subscription_ids)
     requests.post(
         f"http://{settings.DOMAIN}/api/weather-data/v1/"
         f"update-last-notification-time/",
