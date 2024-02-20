@@ -2,9 +2,9 @@ from core.settings.base import *
 
 DEBUG = True
 
-ALLOWED_HOSTS += ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS += ["*"]
 
-DOMAIN = "localhost:8000"
+DOMAIN = "localhost:8000" #for docker 172.19.0.1:8000
 
 
 LOGGING = {
