@@ -1,6 +1,3 @@
-import requests
-
-from django.conf import settings
 from django.db.models import DurationField, ExpressionWrapper, F, IntegerField
 from django.db.models.functions import ExtractDay, ExtractHour, ExtractMinute
 from django.http import HttpRequest
@@ -14,26 +11,9 @@ from reminder.api.v1.serializers import UserSubscriptionSerializer
 from subscription.models import Subscription
 
 
-class APIWeatherData(APIView):
-    def get(self, request: HttpRequest, city: str) -> Response:
-        url = (
-            f"{settings.API_URL}?"
-            f"appid={settings.OPEN_WEATHER_KEY}&"
-            f"units={settings.DEFAULT_UNITS}"
-            f"&q={city}"
-        )
-        response = requests.get(url)
-
-        if response.status_code == 200:
-            data = response.json()
-            weather_data = data["list"][0]
-            return Response(data=weather_data, status=200)
-
-        return Response(status=404)
-
-
 class NotificationSubscription(APIView):
     def get(self, request: HttpRequest) -> Response:
+        print('Start get NotificationSubscription')
         notification_time = timezone.now()
 
         time_difference_expression = ExpressionWrapper(

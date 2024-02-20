@@ -24,7 +24,7 @@ def send_subscription_email():
     for thread in threads:
         thread.join()
 
-    update_last_notification_time.delay(subscriptions)
+    update_last_notification_time(subscriptions)
 
 
 @shared_task
@@ -35,9 +35,16 @@ def make_notification(subscription: dict[str, t.Any]) -> None:
 
 @shared_task
 def get_weather_data(city: str):
-    return requests.get(
-        f"http://{settings.DOMAIN}/api/weather-data/v1/get_data/{city}"
-    ).json()
+    url = (
+        f"{settings.API_URL}?"
+        f"appid={settings.OPEN_WEATHER_KEY}&"
+        f"units={settings.DEFAULT_UNITS}"
+        f"&q={city}"
+    )
+    response = requests.get(url)
+    data = response.json()
+    weather_data = data["list"][0]
+    return weather_data
 
 
 @shared_task
