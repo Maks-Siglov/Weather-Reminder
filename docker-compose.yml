@@ -11,12 +11,17 @@ services:
       - DB_NAME=weather_reminder
       - DB_USER=admin
       - DB_PASSWORD=admin
-
+      - EMAIL_HOST=smtp.gmail.com
+      - EMAIL_PORT=587
+      - EMAIL_HOST_USER=etqueens22@gmail.com
+      - EMAIL_HOST_PASSWORD=jylq lnxw jhwf lill
+      - OPEN_WEATHER_API_KEY=6e79765ce84745c27ca024ad23cb50eb
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000"
-
     depends_on:
       - database
+    networks:
+      - mynetwork
 
   database:
     image: postgres:16.2-alpine3.19
@@ -24,8 +29,10 @@ services:
       - POSTGRES_DB=weather_reminder
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
+    networks:
+      - mynetwork
 
-  worker:
+  celery-worker:
     build:
       context: .
     hostname: worker
@@ -33,14 +40,17 @@ services:
     command: -A core worker --loglevel=info
     volumes:
       - ./weather_reminder:/weather_reminder
-    links:
-      - redis
     depends_on:
       - redis
+      - weather-reminder
+    networks:
+      - mynetwork
 
   redis:
     image: redis:7.2.4-alpine
     hostname: redis
+    networks:
+      - mynetwork
 
   flower:
     build:
@@ -49,10 +59,12 @@ services:
     command: sh -c "celery -A core flower --address=0.0.0.0 --port=5555"
     volumes:
       - ./weather_reminder:/weather_reminder
-    links:
-      - redis
     depends_on:
       - redis
     ports:
       - "5555:5555"
+    networks:
+      - mynetwork
 
+networks:
+  mynetwork:
