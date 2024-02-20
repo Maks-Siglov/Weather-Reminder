@@ -11,11 +11,6 @@ services:
       - DB_NAME=weather_reminder
       - DB_USER=admin
       - DB_PASSWORD=admin
-      - EMAIL_HOST=smtp.gmail.com
-      - EMAIL_PORT=587
-      - EMAIL_HOST_USER=etqueens22@gmail.com
-      - EMAIL_HOST_PASSWORD=jylq lnxw jhwf lill
-      - OPEN_WEATHER_API_KEY=6e79765ce84745c27ca024ad23cb50eb
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000"
     depends_on:
@@ -36,6 +31,12 @@ services:
     build:
       context: .
     hostname: worker
+    environment:
+      - EMAIL_HOST=smtp.gmail.com
+      - EMAIL_PORT=587
+      - EMAIL_HOST_USER=etqueens22@gmail.com
+      - EMAIL_HOST_PASSWORD=jylq lnxw jhwf lill
+      - OPEN_WEATHER_API_KEY=6e79765ce84745c27ca024ad23cb50eb
     entrypoint: celery
     command: -A core worker --loglevel=info
     volumes:

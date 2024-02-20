@@ -13,7 +13,6 @@ from subscription.models import Subscription
 
 class NotificationSubscription(APIView):
     def get(self, request: HttpRequest) -> Response:
-        print('Start get NotificationSubscription')
         notification_time = timezone.now()
 
         time_difference_expression = ExpressionWrapper(
@@ -32,6 +31,7 @@ class NotificationSubscription(APIView):
             is_enabled=True,
             time_difference_hours__gte=F("notification_period"),
         ).select_related("user")
+        subscriptions = Subscription.objects.all()
         serializer = UserSubscriptionSerializer(subscriptions, many=True)
 
         return Response(serializer.data)
