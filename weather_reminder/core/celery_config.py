@@ -17,6 +17,6 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     "send-weather-email-every-hour": {
         "task": "reminder.tasks.send_subscription_email",
-        "schedule": crontab(minute='*'),
+        "schedule": crontab(minute="0", hour="*"),
     },
 }

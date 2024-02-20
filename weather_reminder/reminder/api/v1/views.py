@@ -31,7 +31,6 @@ class NotificationSubscription(APIView):
             is_enabled=True,
             time_difference_hours__gte=F("notification_period"),
         ).select_related("user")
-        subscriptions = Subscription.objects.all()
         serializer = UserSubscriptionSerializer(subscriptions, many=True)
 
         return Response(serializer.data)

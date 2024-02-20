@@ -53,6 +53,21 @@ services:
     networks:
       - mynetwork
 
+  celery-beat:
+    build:
+      context: .
+    hostname: beat
+    entrypoint: celery
+    command: -A core beat --loglevel=info
+    volumes:
+      - ./weather_reminder:/weather_reminder
+    depends_on:
+      - celery-worker
+      - redis
+      - weather-reminder
+    networks:
+      - mynetwork
+
   flower:
     build:
       context: .
