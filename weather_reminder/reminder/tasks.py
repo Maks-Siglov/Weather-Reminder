@@ -1,8 +1,8 @@
 import requests
 import typing as t
 
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
-from threading import Thread
 
 from celery import shared_task
 from celery.signals import task_success
@@ -12,19 +12,32 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 
 
+@task_success.connect(sender="reminder.tasks.send_subscription_email")
+def update_last_notification_time(subscriptions, **kwargs) -> None:
+    subscription_ids = []
+    for subscription in subscriptions:
+        subscription_ids.append(subscription["pk"])
+    requests.post(
+        f"http://{settings.DOMAIN}/api/weather-data/v1/"
+        f"update-last-notification-time/",
+        json={"subscription_ids": subscription_ids},
+    )
+
+
 @shared_task
 def send_subscription_email():
     subscriptions = requests.get(
         f"http://{settings.DOMAIN}/api/weather-data/v1/get_subscription/"
     ).json()
-    threads = []
-    for subscription in subscriptions:
-        thread = Thread(target=make_notification, args=(subscription,))
-        threads.append(thread)
-        thread.start()
 
-    for thread in threads:
-        thread.join()
+    with ThreadPoolExecutor(max_workers=len(subscriptions)) as executor:
+        futures = [
+            executor.submit(make_notification, subscriptions)
+            for subscriptions in subscriptions
+        ]
+
+        for future in futures:
+            future.result()
 
     return subscriptions
 
@@ -74,15 +87,3 @@ def send_email(
         to=(subscription["user_email"],),
     )
     mail.send()
-
-
-@task_success.connect(sender="reminder.tasks.send_subscription_email")
-def update_last_notification_time(subscriptions, **kwargs) -> None:
-    subscription_ids = []
-    for subscription in subscriptions:
-        subscription_ids.append(subscription["pk"])
-    requests.post(
-        f"http://{settings.DOMAIN}/api/weather-data/v1/"
-        f"update-last-notification-time/",
-        json={"subscription_ids": subscription_ids},
-    )
