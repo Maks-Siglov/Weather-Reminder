@@ -5,14 +5,13 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 
 from celery import shared_task
-from celery.signals import task_success
 
 from django.conf import settings
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 
 
-@task_success.connect(sender="reminder.tasks.send_subscription_email")
+@shared_task
 def update_last_notification_time(subscriptions, **kwargs) -> None:
     subscription_ids = []
     for subscription in subscriptions:
@@ -29,17 +28,16 @@ def send_subscription_email():
     subscriptions = requests.get(
         f"http://{settings.DOMAIN}/api/weather-data/v1/get_subscription/"
     ).json()
+    if subscriptions:
+        with ThreadPoolExecutor(max_workers=len(subscriptions)) as executor:
+            futures = [
+                executor.submit(make_notification, subscriptions)
+                for subscriptions in subscriptions
+            ]
+            for future in futures:
+                future.result()
 
-    with ThreadPoolExecutor(max_workers=len(subscriptions)) as executor:
-        futures = [
-            executor.submit(make_notification, subscriptions)
-            for subscriptions in subscriptions
-        ]
-
-        for future in futures:
-            future.result()
-
-    return subscriptions
+        update_last_notification_time.delay(subscriptions)
 
 
 @shared_task

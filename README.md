@@ -65,6 +65,12 @@ Clone the Repository:
     EMAIL_HOST_PASSWORD='Replace with your app password'    
     ```
 
+## Start with Docker
+
+
+```bash
+  docker compose up  
+ ```
 
 ## API Routes
 

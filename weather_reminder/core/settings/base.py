@@ -212,5 +212,7 @@ API_URL = "https://api.openweathermap.org/data/2.5/forecast"
 
 
 CELERY_BROKER_URL = "redis://redis:6379/0"
+CELERY_TASK_TRACK_STARTED = True
 CELERY_ACCEPT_CONTENT = ("application/json",)
 CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = "Europe/Kiev"
