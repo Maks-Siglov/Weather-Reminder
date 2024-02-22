@@ -1,5 +1,14 @@
-from django.db.models import DurationField, ExpressionWrapper, F, IntegerField
-from django.db.models.functions import ExtractDay, ExtractHour, ExtractMinute
+from django.db.models import (
+    DurationField,
+    ExpressionWrapper,
+    F,
+    IntegerField,
+)
+from django.db.models.functions import (
+    ExtractDay,
+    ExtractHour,
+    ExtractMinute,
+)
 from django.http import HttpRequest
 from django.utils import timezone
 

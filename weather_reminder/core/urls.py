@@ -1,18 +1,5 @@
 """
-URL configuration for core project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+URL configuration for Weather Reminder project.
 """
 
 from django.contrib import admin
@@ -23,7 +10,7 @@ urlpatterns = [
     path("api/auth/v1/", include("users.api.v1.urls", namespace="auth_api")),
     path(
         "api/weather-data/v1/",
-        include("reminder.api.v1.urls", namespace="weather_api")
+        include("reminder.api.v1.urls", namespace="weather_api"),
     ),
     path(
         "api/subscription/v1/",
@@ -32,7 +19,7 @@ urlpatterns = [
     path("", include("main.urls", namespace="main")),
     path(
         "subscriptions/",
-        include("subscription.urls", namespace="subscription")
+        include("subscription.urls", namespace="subscription"),
     ),
     path("users/", include("users.urls", namespace="users")),
 ]

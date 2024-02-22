@@ -1,5 +1,5 @@
-import requests
 import typing as t
+import requests
 
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime

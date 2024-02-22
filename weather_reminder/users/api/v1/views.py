@@ -2,9 +2,11 @@ from django.conf import settings
 from django.contrib.auth import login, logout
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpRequest
+
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
+
 from users.api.v1.serializers import UserSerializer
 from users.models import User
 

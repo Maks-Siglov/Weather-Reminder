@@ -19,23 +19,32 @@ Clone the Repository:
 
     ```bash
     pip install -r requirements/prod.txt -r requirements/dev.txt
-
     ```
 
-3. Apply migrations:
+3. Create postgres db and place data to the .env file:
+    - **Example data in .env:**
+    ```bash
+    DB_NAME='weather_reminder'
+    DB_USER='admin'
+    DB_PASSWORD='admin'
+    DB_HOST='localhost'
+    DB_PORT=5432
+    ```
+
+4. Apply migrations:
 
     ```bash
     cd weather_reminder/
     python manage.py migrate
     ```
 
-4. Load Dumpdata:
+5. Load Dumpdata:
 
     ```bash
     python manage.py loaddata fixtures/dumpdata.json
     ```
 
-5. Superuser:
+6. Superuser:
 
    - **Create a Superuser:**
      ```bash
@@ -46,13 +55,13 @@ Clone the Repository:
      - **Email:** admin@gmail.com
      - **Password:** 336611qq
 
-6. Run the development server:
+7. Run the development server:
 
     ```bash
     python manage.py runserver
     ```
 
-7. Visit `http://127.0.0.1:8000/admin/` to log in with your superuser account and start using WeatherReminder.
+8. Visit `http://127.0.0.1:8000/admin/` to log in with your superuser account and start using WeatherReminder.
 
 ## Enable extended functionality
 

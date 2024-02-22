@@ -1,12 +1,10 @@
 import json
-import pytest
 
+import pytest
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import reverse
 from django.test.client import Client
-
 from subscription.models import Subscription
-
 from users.models import User
 
 

@@ -42,9 +42,9 @@ services:
     volumes:
       - ./weather_reminder:/weather_reminder
     depends_on:
+      - weather-reminder
       - redis
       - celery-beat
-      - weather-reminder
     networks:
       - mynetwork
 
