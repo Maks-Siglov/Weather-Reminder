@@ -1,7 +1,8 @@
 import pytest
 
-from subscription.models import Subscription
+from django.utils import timezone
 
+from subscription.models import Subscription
 from users.models import User
 
 
@@ -12,8 +13,12 @@ def test_user_with_subscription(db):
         password="test_password",
         email="test@email.com",
     )
+    last_notification_time = timezone.now() - timezone.timedelta(days=2)
     subscription = Subscription.objects.create(
-        user=user, city="London", notification_period=24
+        user=user,
+        city="London",
+        notification_period=24,
+        last_notification_time=last_notification_time
     )
 
     yield user, subscription
