@@ -4,24 +4,43 @@ Welcome to WeatherReminder, your go-to solution for staying updated on the weath
 
 ## Getting Started
 
-
-### Installation
 Clone the Repository:
 
-1. Clone the repository:
+```bash
+git clone https://git.foxminded.ua/foxstudent105590/task_16-django-weather-reminded.git
+cd task_16-django-weather-reminded/
+```
+
+## Start with Docker
+
+
+1. Establish docker user
 
     ```bash
-    git clone https://git.foxminded.ua/foxstudent105590/task_16-django-weather-reminded.git
-    cd task_16-django-weather-reminded/
-    ```
+      source env.sh
+     ```
 
-2. Install dependencies:
+2. Create docker network
+
+    ```bash
+      docker network create mynetwork  
+     ```
+
+3. Start services 
+    ```bash
+      docker compose up  
+     ```
+
+
+## Run locally
+
+1. Install dependencies:
 
     ```bash
     pip install -r requirements/prod.txt -r requirements/dev.txt
     ```
 
-3. Create postgres db and place data to the .env file:
+2. Create postgres db and place data to the .env file:
     - **Example data in .env:**
     ```bash
     DB_NAME='weather_reminder'
@@ -31,20 +50,20 @@ Clone the Repository:
     DB_PORT=5432
     ```
 
-4. Apply migrations:
+3. Apply migrations:
 
     ```bash
     cd weather_reminder/
     python manage.py migrate
     ```
 
-5. Load Dumpdata:
+4. Load Dumpdata:
 
     ```bash
     python manage.py loaddata fixtures/dumpdata.json
     ```
 
-6. Superuser:
+5. Superuser:
 
    - **Create a Superuser:**
      ```bash
@@ -55,13 +74,13 @@ Clone the Repository:
      - **Email:** admin@gmail.com
      - **Password:** 336611qq
 
-7. Run the development server:
+6. Run the development server:
 
     ```bash
     python manage.py runserver
     ```
 
-8. Visit `http://127.0.0.1:8000/admin/` to log in with your superuser account and start using WeatherReminder.
+7. Visit `http://127.0.0.1:8000/` and log in with your superuser account, start using WeatherReminder.
 
 ## Enable extended functionality
 
@@ -74,12 +93,6 @@ Clone the Repository:
     EMAIL_HOST_PASSWORD='Replace with your app password'    
     ```
 
-## Start with Docker
-
-
-```bash
-  docker compose up  
- ```
 
 ## API Routes
 
