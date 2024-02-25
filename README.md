@@ -1,4 +1,4 @@
-# WeatherReminder: Your Personal Weather Reminder
+# Your Personal Weather Reminder
 Welcome to WeatherReminder, your go-to solution for staying updated on the weather conditions in your favorite cities. With WeatherReminder, you can effortlessly register, subscribe to cities, and receive personalized weather notifications via email, all tailored to your preferred notification period.
 
 
