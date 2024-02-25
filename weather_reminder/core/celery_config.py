@@ -5,12 +5,11 @@ from celery.schedules import crontab
 
 from django.conf import settings
 
-os.environ.setdefault(
-    "DJANGO_SETTINGS_MODULE", "core.settings.dev"
-)
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.settings.dev")
 
 app = Celery("reminder")
 app.config_from_object("django.conf:settings", namespace="CELERY")
+
 app.conf.broker_url = settings.CELERY_BROKER_URL
 app.conf.result_backend = settings.CELERY_BROKER_URL
 

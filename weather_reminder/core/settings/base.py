@@ -9,9 +9,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
-SECRET_KEY = (
-    os.environ["DJANGO_SECRET_KEY"]
-)
+SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 
 DEBUG = True
 
@@ -27,10 +25,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
+    # External apps
     "rest_framework",
     "celery",
-
+    # Internal apps
     "main.apps.MainConfig",
     "users.apps.UsersConfig",
     "subscription.apps.SubscriptionConfig",
@@ -199,5 +197,5 @@ CELERY_BROKER_URL = (
 )
 CELERY_TASK_TRACK_STARTED = True
 CELERY_ACCEPT_CONTENT = ("application/json",)
-CELERY_RESULT_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = "json"
 CELERY_TIMEZONE = "Europe/Kiev"

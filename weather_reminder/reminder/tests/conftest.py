@@ -18,7 +18,7 @@ def test_user_with_subscription(db):
         user=user,
         city="London",
         notification_period=24,
-        last_notification_time=last_notification_time
+        last_notification_time=last_notification_time,
     )
 
     yield user, subscription
