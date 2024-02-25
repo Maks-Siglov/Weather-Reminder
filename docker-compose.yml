@@ -8,7 +8,7 @@ services:
     volumes:
       - ./weather_reminder:/weather_reminder
     env_file:
-      - .env
+      - .env.docker
     command: [
       "sh", "-c", "python manage.py migrate &&
       python manage.py loaddata fixtures/dumpdata.json &&
@@ -24,7 +24,7 @@ services:
     image: postgres:16.2
     container_name: postgres_db
     env_file:
-      - .env
+      - .env.docker
     environment:
       - DB_HOST=postgres_weather_reminder
       - POSTGRES_DB=weather_reminder
@@ -52,7 +52,7 @@ services:
     user: ${CURRENT_UID}
     container_name: celery_worker
     env_file:
-      - .env
+      - .env.docker
     command: celery -A core worker --loglevel=info
     volumes:
       - ./weather_reminder:/weather_reminder
@@ -70,7 +70,7 @@ services:
     environment:
       - BROKER_CONNECTION_RETRY_ON_STARTUP=True
     env_file:
-      - .env
+      - .env.docker
     command: celery -A core beat --loglevel=info
     volumes:
       - ./weather_reminder:/weather_reminder
@@ -85,7 +85,7 @@ services:
     user: ${CURRENT_UID}
     container_name: flower
     env_file:
-      - .env
+      - .env.docker
     command: sh -c "celery -A core flower --address=0.0.0.0 --port=5555"
     volumes:
       - ./weather_reminder:/weather_reminder
