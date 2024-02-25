@@ -6,6 +6,7 @@ from users.models import User
 @pytest.fixture
 def test_user(db):
     user = User.objects.create_user(
+        pk=10,
         username="test_username",
         password="test_password",
         email="test@email.com",
@@ -24,7 +25,7 @@ def test_user_with_subscription(db):
         email="test@email.com",
     )
     subscription = Subscription.objects.create(
-        user=user, city="London", notification_period=24
+        user=user, city="Kiev", notification_period=24
     )
 
     yield user, subscription

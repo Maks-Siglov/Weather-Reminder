@@ -14,4 +14,3 @@ def test_get_subscription_for_notification(
     response = client.get(reverse("weather_api:get_subscription"))
     assert response.status_code == 200
     assert len(response.json()) == 1
-

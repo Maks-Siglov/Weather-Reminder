@@ -12,7 +12,7 @@ from users.models import User
 def test_create_subscription_api(client: Client, test_user: User):
     client.login(username=test_user.email, password=test_user.password)
 
-    post_data = {"user": 1, "city": "New-York", "notification_period": 12}
+    post_data = {"user": 10, "city": "New-York", "notification_period": 12}
     response = client.post(reverse("subscription_api:create"), post_data)
     assert response.status_code == 201
 
