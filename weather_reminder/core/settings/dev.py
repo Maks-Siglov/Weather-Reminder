@@ -4,7 +4,7 @@ DEBUG = True
 
 ALLOWED_HOSTS += ["*"]
 
-DOMAIN = "localhost:8000" #for docker 172.17.0.1:8000
+DOMAIN = "172.18.0.1:8000" #for docker 172.18.0.1:8000
 
 
 LOGGING = {

@@ -1,0 +1,9 @@
+.dockerignore
+**/.git
+**/.DS_Store
+.vscode
+.idea
+.gitignore
+.flake8
+pytest.ini
+README.md

@@ -1,44 +1,54 @@
 services:
   weather-reminder:
-    build:
-      context: .
+    build: .
+    user: ${CURRENT_UID}
+    container_name: weather_reminder
     ports:
       - "8000:8000"
     volumes:
       - ./weather_reminder:/weather_reminder
-    environment:
-      - DB_HOST=database
-      - DB_NAME=weather_reminder
-      - DB_USER=admin
-      - DB_PASSWORD=admin
-    command: >
-      sh -c "python manage.py runserver 0.0.0.0:8000"
+    env_file:
+      - .env
+    command: ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
     depends_on:
       - database
     networks:
       - mynetwork
 
   database:
-    image: postgres:16.2-alpine3.19
+    image: postgres:16.2
+    container_name: postgres_weather_reminder
+    env_file:
+      - .env
     environment:
+      - DB_HOST=postgres_weather_reminder
       - POSTGRES_DB=weather_reminder
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    networks:
+      - mynetwork
+
+  redis:
+    image: redis:7.2.4
+    container_name: redis_weather_reminder
+    volumes:
+      - redis-db-volume:/data
+    ports:
+      - "6379:6379"
     networks:
       - mynetwork
 
   celery-worker:
-    build:
-      context: .
-    hostname: worker
-    environment:
-      - EMAIL_HOST=smtp.gmail.com
-      - EMAIL_PORT=587
-      - EMAIL_HOST_USER=etqueens22@gmail.com
-      - EMAIL_HOST_PASSWORD=jylq lnxw jhwf lill
-      - OPEN_WEATHER_API_KEY=6e79765ce84745c27ca024ad23cb50eb
-    entrypoint: celery
-    command: -A core worker --loglevel=info
+    build: .
+    user: ${CURRENT_UID}
+    container_name: celery_worker
+    env_file:
+      - .env
+    command: celery -A core worker --loglevel=info
     volumes:
       - ./weather_reminder:/weather_reminder
     depends_on:
@@ -48,18 +58,15 @@ services:
     networks:
       - mynetwork
 
-  redis:
-    image: redis:7.2.4-alpine
-    hostname: redis
-    networks:
-      - mynetwork
-
   celery-beat:
-    build:
-      context: .
-    hostname: beat
-    entrypoint: celery
-    command: -A core beat --loglevel=info
+    build: .
+    user: ${CURRENT_UID}
+    container_name: beat_weather_reminder
+    environment:
+      - BROKER_CONNECTION_RETRY_ON_STARTUP=True
+    env_file:
+      - .env
+    command: celery -A core beat --loglevel=info
     volumes:
       - ./weather_reminder:/weather_reminder
     depends_on:
@@ -69,13 +76,17 @@ services:
       - mynetwork
 
   flower:
-    build:
-      context: .
-    hostname: flower
+    build: .
+    user: ${CURRENT_UID}
+    container_name: flower_weather_reminder
+    env_file:
+      - .env
     command: sh -c "celery -A core flower --address=0.0.0.0 --port=5555"
     volumes:
       - ./weather_reminder:/weather_reminder
     depends_on:
+      - celery-worker
+      - celery-beat
       - redis
     ports:
       - "5555:5555"
@@ -84,3 +95,9 @@ services:
 
 networks:
   mynetwork:
+    external: True
+    name: mynetwork
+
+volumes:
+  postgres-db-volume:
+  redis-db-volume:

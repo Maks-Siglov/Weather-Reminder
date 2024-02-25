@@ -8,13 +8,13 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 SECRET_KEY = (
-    "django-insecure-=040s3!$ux-cq4z=s3dfn1gt^tjc&i6uhz*280*qx0_4$fhizr"
+    os.environ["DJANGO_SECRET_KEY"]
 )
 
 DEBUG = True
@@ -125,11 +125,11 @@ WSGI_APPLICATION = "core.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PASSWORD"),
-        "HOST": os.getenv("DB_HOST"),
-        "PORT": os.getenv("DB_PORT"),
+        "NAME": os.environ["DB_NAME"],
+        "USER": os.environ["DB_USER"],
+        "PASSWORD": os.environ["DB_PASSWORD"],
+        "HOST": os.environ["DB_HOST"],
+        "PORT": os.environ["DB_PORT"],
     }
 }
 
@@ -183,21 +183,24 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = os.getenv("EMAIL_HOST")
-EMAIL_PORT = os.getenv("EMAIL_PORT")
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-DEFAULT_FROM_EMAIL = os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_HOST = os.environ["EMAIL_HOST"]
+EMAIL_PORT = os.environ["EMAIL_PORT"]
+EMAIL_HOST_USER = os.environ["EMAIL_HOST_USER"]
+DEFAULT_FROM_EMAIL = os.environ["EMAIL_HOST_USER"]
+EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
 
-OPEN_WEATHER_KEY = os.getenv("OPEN_WEATHER_API_KEY")
+OPEN_WEATHER_KEY = os.environ["OPEN_WEATHER_API_KEY"]
 DEFAULT_UNITS = "metric"
 API_URL = "https://api.openweathermap.org/data/2.5/forecast"
 
 
-CELERY_BROKER_URL = "redis://redis:6379/0"
+CELERY_BROKER_URL = (
+    f"redis://{os.environ['REDIS_HOST']}:{os.environ['REDIS_PORT']}/"
+    f"{os.environ['REDIS_DB']}"
+)
 CELERY_TASK_TRACK_STARTED = True
 CELERY_ACCEPT_CONTENT = ("application/json",)
 CELERY_RESULT_SERIALIZER = 'json'
