@@ -22,7 +22,7 @@ services:
 
   database:
     image: postgres:16.2
-    container_name: postgres_db
+    container_name: postgres_weather_reminder
     env_file:
       - .env.docker
     environment:
@@ -39,7 +39,7 @@ services:
 
   redis:
     image: redis:7.2.4
-    container_name: redis
+    container_name: redis_weather_reminder
     volumes:
       - redis-db-volume:/data
     ports:
