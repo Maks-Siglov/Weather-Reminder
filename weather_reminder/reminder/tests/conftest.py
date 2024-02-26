@@ -1,4 +1,5 @@
 import pytest
+from celery import Celery
 
 from django.utils import timezone
 
@@ -15,6 +16,7 @@ def test_user_with_subscription(db):
     )
     last_notification_time = timezone.now() - timezone.timedelta(days=2)
     subscription = Subscription.objects.create(
+        pk=1,
         user=user,
         city="London",
         notification_period=24,

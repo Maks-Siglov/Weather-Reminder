@@ -50,8 +50,14 @@ class UpdateLastNotificationTime(APIView):
         subscription_ids = request.data.get("subscription_ids", [])
         subscriptions = Subscription.objects.filter(id__in=subscription_ids)
         now = timezone.now()
+
+        updated_subscriptions = []
         for subscription in subscriptions:
             subscription.last_notification_time = now
-            subscription.save()
+            updated_subscriptions.append(subscription)
+
+        Subscription.objects.bulk_update(
+            updated_subscriptions, ["last_notification_time"]
+        )
 
         return Response(status=200)
