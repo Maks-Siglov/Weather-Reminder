@@ -13,7 +13,6 @@ from django.template.loader import render_to_string
 
 @shared_task
 def update_last_notification_time(subscriptions, **kwargs) -> None:
-    print("*********************", settings.DOMAIN)
     subscription_ids = []
     for subscription in subscriptions:
         subscription_ids.append(subscription["pk"])

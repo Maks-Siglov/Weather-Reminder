@@ -71,7 +71,7 @@ services:
       - BROKER_CONNECTION_RETRY_ON_STARTUP=True
     env_file:
       - .env.docker
-    command: celery -A core beat --loglevel=info
+    command: celery -A core beat --loglevel=info --scheduler redbeat.schedulers.RedBeatScheduler
     volumes:
       - ./weather_reminder:/weather_reminder
     depends_on:

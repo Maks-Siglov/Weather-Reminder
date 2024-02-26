@@ -4,7 +4,7 @@ from core.settings.base import *
 
 DEBUG = True
 
-ALLOWED_HOSTS += ["*"]
+ALLOWED_HOSTS = os.environ["ALLOWED_HOSTS"].split(',')
 
 DOMAIN = os.environ["DOMAIN"]
 
