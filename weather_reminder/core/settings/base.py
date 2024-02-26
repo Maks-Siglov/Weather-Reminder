@@ -182,8 +182,8 @@ EMAIL_USE_SSL = False
 
 
 OPEN_WEATHER_KEY = os.environ["OPEN_WEATHER_API_KEY"]
-DEFAULT_UNITS = "metric"
-API_URL = "https://api.openweathermap.org/data/2.5/forecast"
+DEFAULT_UNITS = os.environ["DEFAULT_UNITS"]
+API_URL = os.environ["OPEN_WEATHER_API_URL"]
 
 
 CELERY_BROKER_URL = (

@@ -31,7 +31,11 @@ cd task_16-django-weather-reminded/
       docker compose up  
      ```
 
-4. See Enable Extended Functionality for enable sending email notification
+4. Now you can log in as admin
+   - **Email:** admin@gmail.com
+   - **Password:** 336611qq 
+
+5. See Enable Extended Functionality for enable sending email notification
 
 ## Run Locally
 
@@ -93,7 +97,12 @@ cd task_16-django-weather-reminded/
     EMAIL_HOST_USER='Replace with your email'
     EMAIL_HOST_PASSWORD='Replace with your app password'    
     ```
-
+   
+2. For getting weather data you need to Open Weather API key
+    - **Replace data in .env file**
+     ```bash
+    OPEN_WEATHER_API_KEY='Place your Open Weather API key here'
+    ```
 
 ## API Routes
 
