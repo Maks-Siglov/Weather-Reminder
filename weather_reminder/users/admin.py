@@ -1,11 +1,20 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
+from subscription.models import Subscription
+
 from users.models import User
+
+
+class SubscriptionInline(admin.TabularInline):
+    model = Subscription
+    extra = 0
 
 
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
+    inlines = (SubscriptionInline,)
+
     list_display = (
         "email",
         "username",
@@ -21,6 +30,7 @@ class UserAdmin(BaseUserAdmin):
         "updated_at",
     )
     search_fields = ("email", "username")
+
     fieldsets = (
         (None, {"fields": ("email", "password")}),
         ("Personal info", {"fields": ("username",)}),
