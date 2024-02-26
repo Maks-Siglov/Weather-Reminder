@@ -190,6 +190,10 @@ CELERY_BROKER_URL = (
     f"redis://{os.environ['REDIS_HOST']}:{os.environ['REDIS_PORT']}/"
     f"{os.environ['REDIS_DB']}"
 )
+REDBEAT_REDIS_URL = (
+    f"redis://{os.environ['REDIS_HOST']}:{os.environ['REDIS_PORT']}/"
+    f"{os.environ['REDBEAT_REDIS_DB']}"
+)
 CELERY_TASK_TRACK_STARTED = True
 CELERY_ACCEPT_CONTENT = ("application/json",)
 CELERY_RESULT_SERIALIZER = "json"
