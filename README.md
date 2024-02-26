@@ -11,7 +11,7 @@ git clone https://git.foxminded.ua/foxstudent105590/task_16-django-weather-remin
 cd task_16-django-weather-reminded/
 ```
 
-## Start with Docker
+## Start With Docker
 
 
 1. Establish docker user
@@ -31,8 +31,9 @@ cd task_16-django-weather-reminded/
       docker compose up  
      ```
 
+4. See Enable Extended Functionality for enable sending email notification
 
-## Run locally
+## Run Locally
 
 1. Install dependencies:
 
@@ -82,7 +83,7 @@ cd task_16-django-weather-reminded/
 
 7. Visit `http://127.0.0.1:8000/` and log in with your superuser account, start using WeatherReminder.
 
-## Enable extended functionality
+## Enable Extended Functionality
 
 1. Project use email for sending reminder message. For using this feature add your email data in .env file
     - **Replace data in .env file**
