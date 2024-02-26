@@ -56,7 +56,7 @@ class SubscriptionList(APIView):
 
 
 class DisableSubscription(APIView):
-    def post(self, request: HttpRequest, subscription_id: int):
+    def post(self, request: HttpRequest, subscription_id: int) -> Response:
         try:
             subscription = Subscription.objects.get(pk=subscription_id)
         except ObjectDoesNotExist:
@@ -73,7 +73,7 @@ class DisableSubscription(APIView):
 
 
 class EnableSubscription(APIView):
-    def post(self, request: HttpRequest, subscription_id: int):
+    def post(self, request: HttpRequest, subscription_id: int) -> Response:
         try:
             subscription = Subscription.objects.get(pk=subscription_id)
         except ObjectDoesNotExist:
