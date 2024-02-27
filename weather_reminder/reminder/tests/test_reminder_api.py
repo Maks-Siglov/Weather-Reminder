@@ -18,14 +18,12 @@ def test_get_subscription_for_notification(
 
 
 def test_update_subscription(
-        client: Client, test_user_with_subscription: tuple[User, Subscription]
+    client: Client, test_user_with_subscription: tuple[User, Subscription]
 ):
     _, subscription = test_user_with_subscription
 
     subscription_id = 1
-    post_data = {
-        "subscription_ids": [subscription_id]
-    }
+    post_data = {"subscription_ids": [subscription_id]}
     response = client.post(
         reverse("weather_api:update_last_notification_time"), post_data
     )
@@ -34,8 +32,8 @@ def test_update_subscription(
     updated_subscription = Subscription.objects.get(pk=subscription_id)
 
     assert (
-            subscription.last_notification_time !=
-            updated_subscription.last_notification_time
+        subscription.last_notification_time
+        != updated_subscription.last_notification_time
     )
     max_allowed_difference = timezone.timedelta(minutes=1)
     time_difference = abs(

@@ -31,5 +31,5 @@ def test_user_with_subscription(db):
 
 @pytest.fixture
 def celery_app():
-    app = Celery('myapp', broker='redis://localhost:6379/0')
+    app = Celery("myapp", broker="redis://localhost:6379/0")
     return app
