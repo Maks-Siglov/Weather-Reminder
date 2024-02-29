@@ -7,8 +7,8 @@ Welcome to WeatherReminder, your go-to solution for staying updated on the weath
 Clone the Repository:
 
 ```bash
-git clone https://git.foxminded.ua/foxstudent105590/task_16-django-weather-reminded.git
-cd task_16-django-weather-reminded/
+git clone https://github.com/Maks-Siglov/Weather-Reminder.git
+cd Weather-Reminder/
 ```
 
 ## Start With Docker
