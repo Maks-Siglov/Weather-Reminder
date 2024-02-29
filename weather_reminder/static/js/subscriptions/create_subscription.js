@@ -30,30 +30,33 @@ document.addEventListener('DOMContentLoaded', function () {
                     })
                         .then(response => {
                             if (response.ok) {
-                                const newAccess = response.access
-                                document.cookie = `access_token=${newAccess}; path=/`
-
-                                fetch(subscriptionForm.action, {
-                                    method: 'POST',
-                                    body: formData,
-                                    headers: {
-                                        'Authorization': `Bearer ${newAccess}`
-                                    }
-                                })
-                                    .then(response => {
-                                        if (response.ok) {
-                                            window.location = '/subscriptions/'
-                                        } else if (response.status === 401) {
-                                            window.location = '/users/login/';
-                                        }
-                                    })
-
-
-                            } else if (response.status === 400) {
-                                displayErrors(response)
-                            } else if (response.status === 401) {
+                                return response.json();
+                            } else {
                                 window.location = '/users/login/';
+                                throw new Error('Failed to refresh token');
                             }
+                        })
+                        .then(data => {
+                            const newAccess = data.access;
+                            document.cookie = `access_token=${newAccess}; path=/`
+
+                            fetch(subscriptionForm.action, {
+                                method: 'POST',
+                                body: formData,
+                                headers: {
+                                    'Authorization': `Bearer ${getCookie('access_token')}`
+                                }
+                            })
+                                .then(response => {
+                                    if (response.ok) {
+                                        window.location = '/subscriptions/';
+                                    } else if (response.status === 401) {
+                                        window.location = '/users/login/';
+                                    }
+                                });
+                        })
+                        .catch(error => {
+                            console.error('Error refreshing token:', error);
                         });
                 }
             });
