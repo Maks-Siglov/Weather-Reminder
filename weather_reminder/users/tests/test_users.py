@@ -1,5 +1,4 @@
 import pytest
-
 from django.shortcuts import reverse
 from django.test.client import Client
 

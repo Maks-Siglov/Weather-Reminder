@@ -187,6 +187,19 @@ cd task_16-django-weather-reminded/
 - **Description:** Enable disabled subscription
 
 
+### Reminder
+
+##### Get:
+- **Endpoint:** `/api/weather-data/v1/get-subscription/`
+- - **Method:** Get
+- **Description:** Get subscription for notification:
+
+
+##### Update:
+- **Endpoint:** `/api/weather-data/v1/update-last-notification-time`
+- - **Method:** POST
+- **Description:** Update subscription last notification time
+
 
 ## Usage
 

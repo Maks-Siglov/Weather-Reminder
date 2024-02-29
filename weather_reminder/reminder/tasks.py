@@ -26,7 +26,7 @@ def update_last_notification_time(subscriptions, **kwargs) -> None:
 @shared_task
 def send_subscription_email():
     subscriptions = requests.get(
-        f"http://{settings.DOMAIN}/api/weather-data/v1/get_subscription/"
+        f"http://{settings.DOMAIN}/api/weather-data/v1/get-subscription/"
     ).json()
     if subscriptions:
         with ThreadPoolExecutor(max_workers=len(subscriptions)) as executor:

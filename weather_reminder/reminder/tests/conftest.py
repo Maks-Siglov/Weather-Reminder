@@ -1,5 +1,4 @@
 import pytest
-from celery import Celery
 
 from django.utils import timezone
 
@@ -27,9 +26,3 @@ def test_user_with_subscription(db):
 
     subscription.delete()
     user.delete()
-
-
-@pytest.fixture
-def celery_app():
-    app = Celery("myapp", broker="redis://localhost:6379/0")
-    return app

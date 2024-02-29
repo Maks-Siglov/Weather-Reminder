@@ -1,4 +1,5 @@
 import pytest
+
 from subscription.models import Subscription
 from users.models import User
 

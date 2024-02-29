@@ -1,6 +1,7 @@
 import pytest
 from django.shortcuts import reverse
 from django.test.client import Client
+
 from users.models import User
 
 

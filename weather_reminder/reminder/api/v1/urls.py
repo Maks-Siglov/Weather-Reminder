@@ -6,7 +6,7 @@ app_name = "weather_api"
 
 urlpatterns = [
     path(
-        "get_subscription/",
+        "get-subscription/",
         views.NotificationSubscription.as_view(),
         name="get_subscription",
     ),
