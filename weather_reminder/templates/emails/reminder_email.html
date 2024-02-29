@@ -1,0 +1,13 @@
+{% autoescape off %}
+Weather Reminder
+
+Here is the weather data for {{ city }}:
+
+Date and Time: {{ dt_txt }}
+Temperature: {{ main.temp }}°C
+Feels Like: {{ main.feels_like }}°C
+Weather Description: {{ weather_description }}
+Wind Speed: {{ wind_speed }} m/s
+Humidity: {{ humidity }}%
+Cloudiness: {{ cloudiness }}%
+{% endautoescape %}

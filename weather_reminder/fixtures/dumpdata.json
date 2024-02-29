@@ -1,0 +1,136 @@
+[
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$NYsZNmNc50nDAFngCdQV0U$x+xXEPG+zPC7y6FwypErlRaekrkix9bRKvWkLHPgEFo=",
+      "last_login": "2024-02-14T12:51:08.099Z",
+      "username": "Admin",
+      "email": "admin@gmail.com",
+      "is_active": true,
+      "is_superuser": true,
+      "is_staff": true,
+      "created_at": "2024-02-14T12:51:03.642Z",
+      "updated_at": "2024-02-14T12:51:03.642Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "subscription.subscription",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "city": "Kiev",
+      "notification_period": 12,
+      "last_notification_time": "2024-02-14T12:52:42.498Z",
+      "is_enabled": true,
+      "created_at": "2024-02-14T12:51:14.607Z",
+      "updated_at": "2024-02-14T12:54:41.195Z"
+    }
+  },
+  {
+    "model": "subscription.subscription",
+    "pk": 2,
+    "fields": {
+      "user": 1,
+      "city": "Lviv",
+      "notification_period": 12,
+      "last_notification_time": "2024-02-14T12:51:25.475Z",
+      "is_enabled": true,
+      "created_at": "2024-02-14T12:51:25.475Z",
+      "updated_at": "2024-02-14T12:51:25.476Z"
+    }
+  },
+  {
+    "model": "subscription.subscription",
+    "pk": 3,
+    "fields": {
+      "user": 1,
+      "city": "Kharkiv",
+      "notification_period": 8,
+      "last_notification_time": "2024-02-14T12:53:10.447Z",
+      "is_enabled": true,
+      "created_at": "2024-02-14T12:53:05.622Z",
+      "updated_at": "2024-02-14T12:53:10.448Z"
+    }
+  },
+  {
+    "model": "subscription.subscription",
+    "pk": 4,
+    "fields": {
+      "user": 1,
+      "city": "Odesa",
+      "notification_period": 24,
+      "last_notification_time": "2024-02-14T12:54:09.266Z",
+      "is_enabled": true,
+      "created_at": "2024-02-14T12:54:09.267Z",
+      "updated_at": "2024-02-14T12:54:09.267Z"
+    }
+  },
+  {
+    "model": "subscription.subscription",
+    "pk": 5,
+    "fields": {
+      "user": 1,
+      "city": "Ternopil",
+      "notification_period": 24,
+      "last_notification_time": "2024-02-14T12:54:20.356Z",
+      "is_enabled": true,
+      "created_at": "2024-02-14T12:54:20.356Z",
+      "updated_at": "2024-02-14T12:54:20.356Z"
+    }
+  },
+  {
+    "model": "subscription.subscription",
+    "pk": 6,
+    "fields": {
+      "user": 1,
+      "city": "Dnipro",
+      "notification_period": 12,
+      "last_notification_time": "2024-02-14T12:55:17.346Z",
+      "is_enabled": true,
+      "created_at": "2024-02-14T12:55:13.780Z",
+      "updated_at": "2024-02-14T12:55:17.346Z"
+    }
+  },
+  {
+    "model": "subscription.subscription",
+    "pk": 7,
+    "fields": {
+      "user": 1,
+      "city": "London",
+      "notification_period": 12,
+      "last_notification_time": "2024-02-14T12:55:42.617Z",
+      "is_enabled": false,
+      "created_at": "2024-02-14T12:55:42.617Z",
+      "updated_at": "2024-02-14T12:55:42.617Z"
+    }
+  },
+  {
+    "model": "subscription.subscription",
+    "pk": 8,
+    "fields": {
+      "user": 1,
+      "city": "Paris",
+      "notification_period": 12,
+      "last_notification_time": "2024-02-14T12:55:49.154Z",
+      "is_enabled": false,
+      "created_at": "2024-02-14T12:55:49.154Z",
+      "updated_at": "2024-02-14T12:55:49.154Z"
+    }
+  },
+  {
+    "model": "subscription.subscription",
+    "pk": 9,
+    "fields": {
+      "user": 1,
+      "city": "Berlin",
+      "notification_period": 18,
+      "last_notification_time": "2024-02-14T12:55:58.610Z",
+      "is_enabled": false,
+      "created_at": "2024-02-14T12:55:58.611Z",
+      "updated_at": "2024-02-14T12:55:58.611Z"
+    }
+  }
+]

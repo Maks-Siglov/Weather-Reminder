@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Create Subscription{% endblock %}
+
+{% block content %}
+
+    <div class="auth-container">
+        <div class="auth-form">
+        <h2 class="text-center">Create Subscription</h2>
+
+            <div id="error-display">
+                {% if errors %}
+                    <div class="alert alert-danger">
+                        <ul>
+                            {% for error in errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+
+            <form id="subscription-form" action="{% url 'subscription_api:create' %}">
+                <input type="hidden" id="user_id" name="user" value="{{ user.id }}">
+
+                <input type="text" id="city" name="city" placeholder="City" required><br>
+                <input type="number" id="notification_period" name="notification_period" placeholder="Notification Period (in hours)" required><br>
+
+                <button type="submit">Create Subscription</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="{% static 'js/subscriptions/create_subscription.js' %}"></script>
+{% endblock %}

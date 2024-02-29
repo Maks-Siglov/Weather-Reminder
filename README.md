@@ -1,92 +1,222 @@
-# task_16 DjangoWeatherReminded
+# Your Personal Weather Reminder
+Welcome to WeatherReminder, your go-to solution for staying updated on the weather conditions in your favorite cities. With WeatherReminder, you can effortlessly register, subscribe to cities, and receive personalized weather notifications via email, all tailored to your preferred notification period.
 
 
+## Getting Started
 
-## Getting started
+Clone the Repository:
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://git.foxminded.ua/foxstudent105590/task_16-django-weather-reminded.git
-git branch -M main
-git push -uf origin main
+```bash
+git clone https://git.foxminded.ua/foxstudent105590/task_16-django-weather-reminded.git
+cd task_16-django-weather-reminded/
 ```
 
-## Integrate with your tools
+## Start With Docker
 
-- [ ] [Set up project integrations](https://git.foxminded.ua/foxstudent105590/task_16-django-weather-reminded/-/settings/integrations)
 
-## Collaborate with your team
+1. Establish docker user
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+    ```bash
+      source env.sh
+     ```
 
-## Test and Deploy
+2. Create docker network
 
-Use the built-in continuous integration in GitLab.
+    ```bash
+      docker network create mynetwork  
+     ```
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+3. Start services 
+    ```bash
+      docker compose up  
+     ```
 
-***
+4. Now you can log in as admin
+   - **Email:** admin@gmail.com
+   - **Password:** 336611qq 
 
-# Editing this README
+5. See Enable Extended Functionality for enable sending email notification
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+## Run Locally
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+1. Install dependencies:
 
-## Name
-Choose a self-explaining name for your project.
+    ```bash
+    pip install -r requirements/prod.txt -r requirements/dev.txt
+    ```
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+2. Create postgres db and place data to the .env file:
+    - **Example data in .env:**
+    ```bash
+    DB_NAME='weather_reminder'
+    DB_USER='admin'
+    DB_PASSWORD='admin'
+    DB_HOST='localhost'
+    DB_PORT=5432
+    ```
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+3. Apply migrations:
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+    ```bash
+    cd weather_reminder/
+    python manage.py migrate
+    ```
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+4. Load Dumpdata:
+
+    ```bash
+    python manage.py loaddata fixtures/dumpdata.json
+    ```
+
+5. Superuser:
+
+   - **Create a Superuser:**
+     ```bash
+     python manage.py createsuperuser
+     ```
+
+   - **Or Login as the already created Admin:**
+     - **Email:** admin@gmail.com
+     - **Password:** 336611qq
+
+6. Run the development server:
+
+    ```bash
+    python manage.py runserver
+    ```
+
+7. Visit `http://127.0.0.1:8000/` and log in with your superuser account, start using WeatherReminder.
+
+## Enable Extended Functionality
+
+1. Project use email for sending reminder message. For using this feature add your email data in .env file
+    - **Replace data in .env file**
+     ```bash
+    EMAIL_HOST='smtp.gmail.com /or another smtp'
+    EMAIL_PORT=587
+    EMAIL_HOST_USER='Replace with your email'
+    EMAIL_HOST_PASSWORD='Replace with your app password'    
+    ```
+   
+2. For getting weather data you need to Open Weather API key
+    - **Replace data in .env file**
+     ```bash
+    OPEN_WEATHER_API_KEY='Place your Open Weather API key here'
+    ```
+
+## API Routes
+
+### Authorization
+
+##### Register:
+- **Endpoint:** `/api/auth/v1/register/`
+- **Method:** POST
+- **Description:** Registration for a user. Request example:
+```json
+{
+  "username": "test_username",
+  "email": "some@gmail.com",
+  "password": "2277744qq",
+  "confirm_password": "2277744qq"
+}
+```
+
+##### Login:
+- **Endpoint:** `/api/auth/v1/login/`
+- **Method:** POST
+- **Description:** Login for a user. Request example:
+```json
+{
+  "email": "some@gmail.com",
+  "password": "2277744qq"
+}
+```
+
+
+##### Logout:
+- **Endpoint:** `/api/auth/v1/logout/`
+- **Method:** POST
+- **Description:** Logout for a user
+
+
+### Subscription
+
+##### Create:
+- **Endpoint:** `/api/subscription/v1/create`
+- **Method:** POST
+- **Description:** Create subscription notification_period = 24 by default. Request example:
+```json
+{
+  "user": 1,
+  "city": "Kiev",
+  "notification_period": 12
+}
+```
+
+##### Edit:
+- **Endpoint:** `/api/subscription/v1/<int:subscription_id>/edit`
+- **Method:** PUT
+- **Description:** Change subscription's notification_period . Request example:
+```json
+{
+  "notification_period": 20
+}
+```
+
+##### Delete:
+- **Endpoint:** `/api/subscription/v1/<int:subscription_id>/delete`
+- **Method:** DELETE
+- **Description:** Delete subscription by id
+
+
+##### Subscriptions List:
+- **Endpoint:** `/api/subscription/v1/list/<str:username>`
+- **Method:** GET
+- **Description:** Return user's subscriptions
+
+
+##### Disable subscription:
+- **Endpoint:** `/api/subscription/v1/<int:subscription_id>/disable`
+- **Method:** POST
+- **Description:** Notifications will not be sent to the disabled subscription
+
+
+##### Enable subscription:
+- **Endpoint:** `/api/subscription/v1/<int:subscription_id>/enable`
+- **Method:** POST
+- **Description:** Enable disabled subscription
+
+
+### Reminder
+
+##### Get:
+- **Endpoint:** `/api/weather-data/v1/get-subscription/`
+- - **Method:** Get
+- **Description:** Get subscription for notification:
+
+
+##### Update:
+- **Endpoint:** `/api/weather-data/v1/update-last-notification-time`
+- - **Method:** POST
+- **Description:** Update subscription last notification time
+
 
 ## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+- Register an Account:
+Create an account using your email and password to unlock all the features WeatherReminder has to offer.
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+- Log In:
+Sign in to your WeatherReminder account to access your personalized dashboard.
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+- Subscribe to Cities:
+Choose the cities you want to receive weather notifications for and subscribe to them.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+- Stay Updated:
+Sit back and relax as WeatherReminder delivers customized weather updates straight to your inbox at your preferred notification intervals.
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+- Manage Subscriptions:
+Edit, delete, or disable your subscriptions as needed to ensure you're always in control of your weather preferences.
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+- Contributing
+WeatherReminder is an open-source project, and we welcome contributions from the community. Whether it's fixing bugs, adding new features, or improving documentation, your help is greatly appreciated. Please submit a pull request or open an issue on GitHub to get started.
